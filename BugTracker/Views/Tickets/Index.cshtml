@@ -103,6 +103,11 @@
                             <div class="pull-right action-buttons">
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>
                                 @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                @Html.ActionLink("Comments", "Index", "TicketComments", new { id = item.Id }, null)
+
+
+
+
 
 
 

@@ -15,9 +15,16 @@ namespace BugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TicketComments
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var ticketComments = db.TicketComments.Include(t => t.Ticket);
+        //    return View(ticketComments.ToList());
+        //}
+
+
+        public ActionResult Index(int Id)
         {
-            var ticketComments = db.TicketComments.Include(t => t.Ticket);
+            var ticketComments = db.TicketComments.Select(t => t.TicketId == Id);
             return View(ticketComments.ToList());
         }
 
