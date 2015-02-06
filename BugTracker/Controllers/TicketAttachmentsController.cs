@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTracker.Models;
+using System.IO;
+using Microsoft.AspNet.Identity;
+
 
 namespace BugTracker.Controllers
 {
@@ -46,16 +49,31 @@ namespace BugTracker.Controllers
         // POST: TicketAttachments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TicketId,FilePath,Decsription,Created,UserId,FileUrl")] TicketAttachment ticketAttachment)
+        public ActionResult Create([Bind(Include = "Id,TicketId,Decsription")] TicketAttachment ticketAttachment, HttpPostedFileBase fileUpload)
         {
             if (ModelState.IsValid)
             {
+                string currentUserId = User.Identity.GetUserId();
+                ticketAttachment.UserId = currentUserId;
+                ticketAttachment.Created = System.DateTime.Now;
+
+                if (fileUpload != null && fileUpload.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    fileUpload.SaveAs(Path.Combine(Server.MapPath("~/TicketAttachment/"), fileName));
+                    ticketAttachment.FilePath=("~/TicketAttachment/" + fileName);
+                }
+
+
+
                 db.TicketAttachments.Add(ticketAttachment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketAttachment.TicketId);
             return View(ticketAttachment);

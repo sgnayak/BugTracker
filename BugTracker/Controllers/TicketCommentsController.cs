@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTracker.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace BugTracker.Controllers
 {
@@ -44,6 +46,7 @@ namespace BugTracker.Controllers
         }
 
         // GET: TicketComments/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title");
@@ -54,11 +57,16 @@ namespace BugTracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Comment,Created,TicketId,UserId")] TicketComment ticketComment)
+        public ActionResult Create([Bind(Include = "Id,Comment,TicketId")] TicketComment ticketComment)
         {
             if (ModelState.IsValid)
             {
+                ticketComment.Created = System.DateTime.Now;
+                string currentUserId = User.Identity.GetUserId();
+                ticketComment.UserId = currentUserId;
+
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -68,64 +76,64 @@ namespace BugTracker.Controllers
             return View(ticketComment);
         }
 
-        // GET: TicketComments/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TicketComment ticketComment = db.TicketComments.Find(id);
-            if (ticketComment == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
-            return View(ticketComment);
-        }
+        //// GET: TicketComments/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    TicketComment ticketComment = db.TicketComments.Find(id);
+        //    if (ticketComment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
+        //    return View(ticketComment);
+        //}
 
-        // POST: TicketComments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Comment,Created,TicketId,UserId")] TicketComment ticketComment)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(ticketComment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
-            return View(ticketComment);
-        }
+        //// POST: TicketComments/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Comment,Created,TicketId,UserId")] TicketComment ticketComment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(ticketComment).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);
+        //    return View(ticketComment);
+        //}
 
         // GET: TicketComments/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TicketComment ticketComment = db.TicketComments.Find(id);
-            if (ticketComment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ticketComment);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    TicketComment ticketComment = db.TicketComments.Find(id);
+        //    if (ticketComment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(ticketComment);
+        //}
 
-        // POST: TicketComments/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TicketComment ticketComment = db.TicketComments.Find(id);
-            db.TicketComments.Remove(ticketComment);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: TicketComments/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    TicketComment ticketComment = db.TicketComments.Find(id);
+        //    db.TicketComments.Remove(ticketComment);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

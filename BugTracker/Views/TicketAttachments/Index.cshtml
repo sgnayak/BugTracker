@@ -39,13 +39,20 @@
             @Html.DisplayFor(modelItem => item.Ticket.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FilePath)
+            <hr>
+            @if (item.FilePath != null)
+            {
+                <a href=@Url.Content(item.FilePath)>Click me!</a>
+                @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
+            }
+            <hr>
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Decsription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Created)
+            @item.Created.ToString("MM/dd/yy")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserId)

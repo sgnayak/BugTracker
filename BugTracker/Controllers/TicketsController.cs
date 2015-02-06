@@ -84,10 +84,11 @@ namespace BugTracker.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,AssignedToUserId,TicketAttachments")] Ticket ticket, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,AssignedToUserId,TicketAttachments")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
+
                 string currentUserId = User.Identity.GetUserId();
        //         ticket.OwnerUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
                 ticket.OwnerUserId = currentUserId;
@@ -102,14 +103,6 @@ namespace BugTracker.Controllers
                 db.TicketNotifications.Add(ticketNotification);
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-
-                //if (fileUpload != null && fileUpload.ContentLength > 0)
-                //{
-                //    var fileName = Path.GetFileName(fileUpload.FileName);
-                //    fileUpload.SaveAs(Path.Combine(Server.MapPath("~/TicketAttachment/"), fileName));
-                //    ticket.TicketAttachments.Add("~/TicketAttachment/" + fileName);
-                //}
-
 
 
                 return RedirectToAction("Index");
