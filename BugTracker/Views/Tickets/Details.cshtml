@@ -73,7 +73,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.Created)
+                    @Model.Created.ToString("MM/dd/yy")
                 </dd>
 
                 <dt>
@@ -81,15 +81,17 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.Updated)
+                    @if (Model.Updated != null)
+                    {@Model.Updated.Value.ToString("MM/dd/yy")}
+
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.AssignedToUserId)
+                    @Html.DisplayNameFor(model => model.AssignedToUser)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.AssignedToUserId)
+                    @Html.DisplayFor(model => model.AssignedToUser.FirstName)
                 </dd>
 
             </dl>

@@ -49,6 +49,9 @@ namespace BugTracker.Controllers
                 ticketNotification.TicketChanged = false;
                 db.TicketNotifications.Add(ticketNotification);
 
+                            string currentUserId = User.Identity.GetUserId();
+                            ViewBag.AssignedToUserId = ticket.AssignedToUser.FirstName;
+
             db.Entry(ticket).State = EntityState.Modified;
             db.SaveChanges();
             return View(ticket);
@@ -138,6 +141,17 @@ namespace BugTracker.Controllers
             {
                 return HttpNotFound();
             }
+
+            var devId = db.Roles.Single(r => r.Name == "Developer").Id;
+            var adminId = db.Roles.Single(r => r.Name == "Admin").Id;
+            var pmId = db.Roles.Single(r => r.Name == "Project Manager").Id;
+            //      var devs = ticket.Project.Users.AsQueryable().Where(u => u.Roles.Any(r => r.RoleId == devId || r.RoleId == adminId || r.RoleId == pmId)).ToList();
+            var allDevs = db.Users.AsQueryable().Where(u => u.Roles.Any(r => r.RoleId == devId)).ToList();
+
+
+            //ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.AssignedToUserId = new SelectList(allDevs, "Id", "FirstName");
+   
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);

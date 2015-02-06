@@ -11,40 +11,40 @@
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
-        <table class="display" id="table_id">
+        <table class="table table-responsive" id="table_id">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+                        Name
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Project.Name)
+                        Project
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TicketPriority.Name)
+                        Priority
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TicketStatus.Name)
+                        Status
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TicketType.Name)
+                        Type
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Title)
+                        Title
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Description)
+                        Description
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Created)
+                        Created
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Updated)
+                        Updated
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.AssignedToUserId)
+                        Assigned-To
                     </th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +84,9 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Created)
+                            @item.Created.ToString("MM/dd/yy")
+
+                            @*@Html.DisplayFor(modelItem => item.Created)*@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Updated)
