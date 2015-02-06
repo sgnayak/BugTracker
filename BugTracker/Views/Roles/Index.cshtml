@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BugTracker.Models.RolesViewModels>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="wrapper">
+    <div class="container intro">
+
+        @foreach (var item in Model)
+        {
+            @Html.DisplayFor(x => item.UserName);
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserId })
+
+        }
+    </div>
+</div>
+
+

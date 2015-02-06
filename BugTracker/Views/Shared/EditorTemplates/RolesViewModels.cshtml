@@ -1,0 +1,5 @@
+﻿@model BugTracker.Models.Roles
+@Html.CheckBoxFor(x => x.RoleIsSelected)
+@Html.LabelFor(x => x.RoleIsSelected, Model.RoleName)
+@Html.HiddenFor(x => x.RoleName)
+<br />

@@ -1,0 +1,19 @@
+﻿@model BugTracker.Models.RolesViewModels
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "Roles", FormMethod.Post))
+{
+    //Regardless of strongly typed ViewBag if the return (post) controlled is looking for following strings preseeded by name it will work
+    <input type="checkbox" name="AdminSelected" />
+    <input type="checkbox" name="DeveloperSelected" />
+    <input type="checkbox" name="ProjectManagerSelected" />
+    <input type="checkbox" name="SubmitterSelected" />
+    <input id="UserId" name="UserId" type="hidden" value=@Model.UserId />
+    //   @Html.Hidden(Model.UserName)
+    //@Html.HiddenFor(m => Model.UserId)
+    <input type="submit" value="submit" />
+    //@Html.ActionLink("Index", "Roles", new { id = Model.UserName })
+
+}

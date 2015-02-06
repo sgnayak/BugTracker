@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BugTracker.Models.RolesViewModels>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+
+<p>
+    <h4>
+        @foreach (var item in Model)
+        {
+            @Html.DisplayFor(modelItem => item.UserName)
+
+            foreach (var allroles in item.allAvailableRoles)
+            {
+                foreach (var role in item.myCurrentRoles)
+                {
+                    @*@Html.DisplayFor(modelItem => item.myCurrentRoles)*@
+                    <input type="checkbox" name="Roles" value=@role checked />
+                }
+                @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
+            }
+
+        }
+    </h4>
+</p>
+<p>
+</p>

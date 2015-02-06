@@ -1,0 +1,52 @@
+﻿@using MvcCheckBoxList.Model
+@model IEnumerable<BugTracker.Models.RolesViewModels>
+@{
+    ViewBag.Title = "ModifyRoles";
+}
+
+<h2>Roles</h2>
+
+<p>
+
+
+    @*@foreach (var role in ViewBag.ListOfAvailableRolesString)
+        {
+                <p> @role </p>
+        }*@
+    <div>
+
+            @using (Html.BeginForm("ModifyRoles", "Roles", FormMethod.Post))
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(modelitem => item.UserId)
+                            @Html.DisplayFor(modelitem => item.UserName)
+                       
+                            @Html.CheckBoxListFor(modelitem => item.PostedRoles.rolesName,
+                                                    modelitem => item.AvailableRoles,
+                                                    myRoles => myRoles.Id,
+                                                    myRoles => myRoles.Name,
+                                                    modelitem => item.SelectedRoles)
+                        </td>
+                    </tr>
+
+                    <input class="=green" type="submit" value="Modify Roles" />
+
+                }
+
+
+            }
+
+
+    </div>
+
+
+
+
+
+
+</p>
+<p>
+</p>

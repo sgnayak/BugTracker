@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BugTracker.Models.ProjectViewModels>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="wrapper">
+    <div class="container intro">
+        <br />
+        <br />
+        <br />
+
+        <br />
+
+        @*<table style="width:75%" class="table table-striped table-bordered table-condensed">*@
+        <table class="display" id="table_id1">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Assigned Projects</th>
+                    <th>Edit</th>
+                    <th>Change Project Assignment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x => item.UserName)</td>
+                        <td>
+
+                                @foreach (var p in item.Projects)
+                                {
+                                   @Html.DisplayFor(x => p.Name) <br/>
+                                }
+
+                        </td>
+                        <td>@Html.ActionLink("Edit-Project", "Edit", new { UserId = item.UserId })</td>
+                        <td>@Html.ActionLink("Assign Projects", "AssignProjectsToUser", new { UserId = item.UserId })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
