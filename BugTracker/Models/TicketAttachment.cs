@@ -6,6 +6,12 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
+using System.Web.Mvc;
 
 namespace BugTracker.Models
 {
@@ -17,6 +23,7 @@ namespace BugTracker.Models
         public int Id { get; set; }
         public Nullable<int> TicketId { get; set; }
         public string FilePath { get; set; }
+        [AllowHtml]
         public string Decsription { get; set; }
         public System.DateTimeOffset Created { get; set; }
         public string UserId { get; set; }

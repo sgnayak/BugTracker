@@ -4,6 +4,17 @@
     ViewBag.Title = "Index";
 }
 
+<link rel="stylesheet" type="text/css" href="~/js/jquery.select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="~/js/bootstrap.slider/css/slider.css" />
+<link rel="stylesheet" type="text/css" href="~/js/jquery.icheck/skins/flat/green.css">
+
+<script type="text/javascript" src="~/js/bootstrap.switch/bootstrap-switch.js"></script>
+<script type="text/javascript" src="~/js/jquery.icheck/icheck.min.js"></script>
+<script type="text/javascript" src="~/js/jquery.select2/select2.min.js"></script>
+<script type="text/javascript" src="~/js/bootstrap.slider/js/bootstrap-slider.js"></script>
+
+
+
 <div class="wrapper">
     <div class="container">
         <div class="row">
@@ -37,7 +48,7 @@
                                     @Html.Hidden("users[" + i + "].name", Model[i].name)
                                 </td>
                                 <td>
-                                    @Html.CheckBox("users[" + i + "].admin", Model[i].admin, new { @class = "glyphicon" })
+                                    @Html.CheckBox("users[" + i + "].admin", Model[i].admin, new { @class = "icheck" })
                                 </td>
                                 <td>
                                     @Html.CheckBox("users[" + i + "].developer", Model[i].developer)
@@ -57,3 +68,33 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){}
+    /*Input & Radio Buttons*/
+    $('.icheck').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+    });
+
+        $('.demo1').colorpicker({
+            format: 'hex', // force this format
+        });
+        $('.demo2').colorpicker({
+            format: 'hex', // force this format
+        });
+        $('.demo-auto').colorpicker();
+        // Disabled / enabled triggers
+        $(".disable-button").click(function(e) {
+            e.preventDefault();
+            $("#demo_endis").colorpicker('disable');
+        });
+
+        $(".enable-button").click(function(e) {
+            e.preventDefault();
+            $("#demo_endis").colorpicker('enable');
+        });
+
+    }
+
+</script>

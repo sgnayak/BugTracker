@@ -3,6 +3,14 @@
 @{
     ViewBag.Title = "Create";
 }
+<link rel="stylesheet" type="text/css" href="~/js/bootstrap.wysihtml5/dist/bootstrap3-wysihtml5.min.css">
+<link rel="stylesheet" type="text/css" href="~/js/bootstrap.summernote/dist/summernote.css" />
+<script type="text/javascript" src="~/js/bootstrap.summernote/dist/summernote.min.js"></script>
+<script type="text/javascript" src="~/js/bootstrap.wysihtml5/dist/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="~/js/bootstrap.wysihtml5/dist/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="~/js/ckeditor/ckeditor.js"></script>
+<script src="~/js/ckeditor/adapters/jquery.js"></script>
+
 
 
 <div class="wrapper">
@@ -20,7 +28,7 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                     </div>
@@ -28,21 +36,31 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="col-md-8">
 
-                        @*@Html.TextAreaFor(model => model.Description, new { id = "editor1" })
+                        @*<div class="block-flat">
+                            <div class="header">
+                                <h3>Bootstrap Wysihtml5</h3>
+                            </div>
+                            <div class="content">
+                                <textarea style="height:150px;" class="form-control" id="some-textarea"></textarea>
+                            </div>
+                        </div>*@
+                    
+                        @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Id = "CreateDesc", @style="height:150px"} })*@
+
+                        @Html.TextAreaFor(model => model.Description, new { id = "CreateDesc" })
                         <script>
-                                        CKEDITOR.replace("editor1", { toolbar: "Basic" });
-                        </script>*@
+                                        CKEDITOR.replace("CreateDesc", { toolbar: "Basic" });
+                        </script>
 
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProjectId, "ProjectId", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
                     </div>
@@ -50,7 +68,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TicketTypeId, "TicketTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TicketTypeId, "", new { @class = "text-danger" })
                     </div>
@@ -58,7 +76,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TicketPriorityId, "TicketPriority", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
                     </div>
@@ -66,7 +84,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
                     </div>
@@ -82,7 +100,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.AssignedToUserId, "AssignedToUserId", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
                     </div>
@@ -95,7 +113,7 @@
                 </div>*@
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-offset-2 col-md-8">
                         <input type="submit" value="Create" class="btn btn-default" />
                     </div>
                 </div>
@@ -107,3 +125,5 @@
         </div>
     </div>
 </div>
+
+

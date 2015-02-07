@@ -6,16 +6,16 @@
 
 @*<div class="container-fluid" id="pcont">*@
 
-
+<div class="page-head"> @Html.ActionLink("Create New Ticket", "Create") </div>
 <div class="row">
     <div class="col-md-12">
         <div class="block-flat">
             <div class="header">
-                <h3>Basic DataTable</h3>
+                <h3>Tickets Data Table</h3>
             </div>
             <div class="content">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable1">
+                    <table class="table table-bordered" id="datatable-ticket">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -25,8 +25,8 @@
                                 <th>Type</th>
                                 <th>Title</th>
                                 @*<th>Description</th>
-                                <th>Created</th>
-                                <th>Updated</th>*@
+                                    <th>Created</th>
+                                    <th>Updated</th>*@
                                 <th>Assigned-To</th>
                                 <th>Action</th>
                             </tr>
@@ -55,11 +55,11 @@
                                 }
                                 else
                                 {
-                                    color = "FF6347"; 
+                                    color = "FF6347";
                                     color = "alert alert-danger";
                                 } // High
-                                }
-                                    
+                                    }
+
                                     @*<td bgcolor="#@color">*@
                                     <td class="@color">
 
@@ -75,14 +75,14 @@
                                         @Html.DisplayFor(modelItem => item.Title)
                                     </td>
                                     @*<td>
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td>
-                                        @item.Created.ToString("MM/dd/yy")
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Updated)
-                                    </td>*@
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @item.Created.ToString("MM/dd/yy")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Updated)
+                                        </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)
                                     </td>
@@ -96,13 +96,6 @@
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>
                                             @Html.ActionLink("Details", "Details", new { id = item.Id })
                                             @Html.ActionLink("Comments", "Create", "TicketComments", new { id = item.Id }, null)
-
-
-
-
-
-
-
 
                                             @*<a href="href="@Url.Action("Edit", "Tickets", new { id="item.Id" })" @class ="flag"> <span class="glyphicon glyphicon-pencil"></span></a>
                                                 <a href="href=" @Url.Action("Delete", "Tickets", new { id = "item.Id"}) "" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
