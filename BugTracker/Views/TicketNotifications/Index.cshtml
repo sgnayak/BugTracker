@@ -27,7 +27,7 @@
             @Html.DisplayFor(modelItem => item.Ticket.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
+            @Html.DisplayFor(modelItem => item.User.DisplayName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

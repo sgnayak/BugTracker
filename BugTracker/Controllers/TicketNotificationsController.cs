@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTracker.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace BugTracker.Controllers
 {
@@ -128,5 +130,13 @@ namespace BugTracker.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //public ActionResult GetCount()
+        //{
+        //   string currentUserId = User.Identity.GetUserId();
+        //    int count = db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
+        //    return PartialView(count);
+        //}
     }
 }

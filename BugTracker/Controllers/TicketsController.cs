@@ -41,16 +41,21 @@ namespace BugTracker.Controllers
                 return HttpNotFound();
             }
             ticket.TicketRead = true;
+            string currentUserId = User.Identity.GetUserId();
+            ViewBag.AssignedToUserId = ticket.AssignedToUser.FirstName;
 
+            // If the User is Currently Logged in and Ticket Notification for ticket id belongs to the person remove it
                 TicketNotification ticketNotification = new TicketNotification();
-                ticketNotification.UserId = ticket.AssignedToUserId;
-                ticketNotification.TicketId = ticket.Id;
-                ticketNotification.TickedNew = false;
-                ticketNotification.TicketChanged = false;
-                db.TicketNotifications.Add(ticketNotification);
-
-                            string currentUserId = User.Identity.GetUserId();
-                            ViewBag.AssignedToUserId = ticket.AssignedToUser.FirstName;
+                //ticketNotification.UserId = ticket.AssignedToUserId;
+                //ticketNotification.TicketId = ticket.Id;
+                //ticketNotification.TickedNew = false;
+                //ticketNotification.TicketChanged = false;
+                //db.TicketNotifications.Add(ticketNotification);
+                ticketNotification = db.TicketNotifications.FirstOrDefault(u => u.UserId == currentUserId && u.TicketId == ticket.Id);
+                if (ticketNotification != null)
+                {
+                    db.TicketNotifications.Remove(ticketNotification);
+                }
 
             db.Entry(ticket).State = EntityState.Modified;
             db.SaveChanges();
