@@ -1,105 +1,99 @@
 ﻿@model BugTracker.Models.Ticket
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Details";
 }
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h4>Ticket Title : @Model.Title</h4>
+                <p><span class="glyphicon glyphicon-time"></span>Posted On @Model.Created.ToString("MM dd yyyy") </p>
 
-<div class="wrapper">
-    <div class="container intro">
-        <h2>Details</h2>
+            </div>
+            <div class="content">
 
-        <div>
-            <h4>Ticket</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
-                </dt>
+                <div class="row">
 
-                <dd>
-                    @Html.DisplayFor(model => model.OwnerUser.FirstName)
-                </dd>
+                    <h4> Ticket Title : @Model.Project.Name </h4>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Project.Name)
-                </dt>
+                    <h4> Ticket Type : @Model.TicketType.Name</h4>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Project.Name)
-                </dd>
+                    <h4> Ticket Priority : @Model.TicketPriority.Name</h4>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketPriority.Name)
-                </dt>
+                    <h4> Model.TicketStatus.Name)</h4>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketPriority.Name)
-                </dd>
+                    <h4> Owner : @Model.OwnerUser.DisplayName</h4>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketStatus.Name)
-                </dt>
+                    <h4> Assigned User : @Model.AssignedToUser.DisplayName</h4>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketStatus.Name)
-                </dd>
+                    <h4> Ticket Description : @Model.Description</h4>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketType.Name)
-                </dt>
+                </div>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TicketType.Name)
-                </dd>
+                <hr />
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Title)
-                </dt>
+                @if (@Model.TicketComments.Count > 0)
+                {
+                    <div class="row">
+                        <h4>Comments Posted On This Post </h4>
+                        <hr>
+                    </div>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Title)
-                </dd>
+                    foreach (var c in @Model.TicketComments)
+                    {
+                        <div class="row">
+                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
+                            <h2>
+                                @c.User.DisplayName
+                            </h2>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
+                            <h2>
+                                @c.Comment
+                            </h2>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Created)
-                </dt>
+                        </div>
+                        <hr />
+                    }
+                }
 
-                <dd>
-                    @Model.Created.ToString("MM/dd/yy")
-                </dd>
+                @if (@Model.TicketAttachments.Count > 0)
+                {
+                    <div class="row">
+                        <h4>Attachments Posted On This Post</h4>
+                        <hr>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Updated)
-                </dt>
+                    </div>
 
-                <dd>
-                    @if (Model.Updated != null)
-                    {@Model.Updated.Value.ToString("MM/dd/yy")}
+                    foreach (var c in @Model.TicketAttachments)
+                    {
+                        <div class="row">
+                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
 
-                </dd>
+                            <h4>@c.User.DisplayName</h4>
+                            <h4>@c.Decsription</h4>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.AssignedToUser)
-                </dt>
+                            @if (c.FilePath != null)
+                            {
+                                <h4 class="text-danger"><a href=@Url.Content(c.FilePath)>Click To Open File</a></h4>
+                                @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
+                            }
 
-                <dd>
-                    @Html.DisplayFor(model => model.AssignedToUser.FirstName)
-                </dd>
+                        </div>
+                    }
+                }
 
-            </dl>
+            </div>
+
         </div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Back to List", "Index") |
-            @Html.ActionLink("Create Comment", "Create", "TicketComments", new { id = Model.Id }, null) |
-        </p>
     </div>
 </div>
+

@@ -528,6 +528,7 @@
     <Content Include="images\li-icon.png" />
     <Content Include="images\loading.gif" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logo1.png" />
     <Content Include="images\menu-tail-left.png" />
     <Content Include="images\menu-tail-up.png" />
     <Content Include="images\meteocons\meteo_01.png" />
@@ -4327,6 +4328,7 @@
     <Content Include="images\small-icons\readme.rtf" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Tickets\Index - Copy.cshtml" />
+    <Content Include="Views\Tickets\Details - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
