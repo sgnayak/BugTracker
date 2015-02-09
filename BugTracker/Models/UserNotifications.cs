@@ -71,7 +71,7 @@ namespace BugTracker.Models
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                var roles = uRoleHelper.ListUserRoles(currentUserId);
+                var roles = uRoleHelper.ListUserRoles(currentUserId).OrderBy(s => s);
                 foreach (string myRole in roles)
                 {
                     if (myRole == "Admin")

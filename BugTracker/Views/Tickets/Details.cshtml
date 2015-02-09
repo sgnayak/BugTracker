@@ -11,88 +11,122 @@
     </ol>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="block-flat">
             <div class="header">
-                <h4>Ticket Title : @Model.Title</h4>
-                <p><span class="glyphicon glyphicon-time"></span>Posted On @Model.Created.ToString("MM dd yyyy") </p>
+                <h3>Ticket Title : @Model.Title </h3>
+                <div class="alert-block" style="padding:3px;">
+                    <h5 style="padding:1px; color:#816bb1"><strong> By @Model.OwnerUser.DisplayName</strong><span class="pull-right">Posted On @Model.Created.ToString("MMMM dd yyyy")</span></h5>
+                </div>
+            </div>
+            <div class="content overflow-hidden">
+                <div class="well">
+                    @Model.Description
+                </div>
 
+                <div class="tab-container">
+                    <ul class="nav nav-tabs fa-border">
+                        <li class="active alert-warning"><a href="#Comments" data-toggle="tab"><strong>Comments</strong></a></li>
+                        <li class="alert-success"><a href="#Attachments" data-toggle="tab"><strong>Attachments</strong></a></li>
+                        <li class="alert-info"><a href="#History" data-toggle="tab"><strong>History</strong></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active cont" id="Comments">
+                            @if (@Model.TicketComments.Count > 0)
+                            {
+                                <h4>Comments for this ticket</h4>
+                                <hr>
+                                foreach (var c in @Model.TicketComments)
+                                {
+                                    <h5 style="padding:1px; color:#816bb1"><strong> By : @c.User.DisplayName  </strong>   <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
+                                    <h5>@c.Comment</h5>
+                                    <hr />
+                                }
+                            }
+                            else
+                            {
+                                <h4>No comments posted </h4>
+                            }
+                        </div>
+                        <div class="tab-pane cont" id="Attachments">
+                            @if (@Model.TicketAttachments.Count > 0)
+                            {
+                                <h4>Attachments for this ticket</h4>
+                                <hr>
+                                foreach (var c in @Model.TicketAttachments)
+                                {
+                                    <h5 class="alert-primary" style="padding:1px;">Posted By : @c.User.DisplayName     <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
+                                    <h5>@c.Decsription</h5>
+                                    if (c.FilePath != null)
+                                    {
+                                        <h5 class="text-danger"><a href=@Url.Content(c.FilePath)>Click To Open File</a></h5>
+                                        @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <h4>No Attachments</h4>
+                            }
+                        </div>
+                        <div class="tab-pane cont" id="History">
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="block-flat">
+            <div class="header">
+                <div class="pull-right actions">
+                </div>
+                <h3>Ticket Info</h3>
             </div>
             <div class="content">
 
-                <div class="row">
+                <div class="alert alert-primary alert-white rounded">
+                    <div class="icon"><i class="fa fa-info-circle"></i></div>
+                    <strong>Type : @Model.TicketType.Name</strong>
+                </div>
+                @if (@Model.TicketPriority.Name == "High")
+                {
+                    <div class="alert alert-warning alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
+                else if (@Model.TicketPriority.Name == "Medium")
+                {
+                    <div class="alert alert-info alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-success alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
 
-                    <h4> Ticket Title : @Model.Project.Name </h4>
 
-                    <h4> Ticket Type : @Model.TicketType.Name</h4>
-
-                    <h4> Ticket Priority : @Model.TicketPriority.Name</h4>
-
-                    <h4> Model.TicketStatus.Name)</h4>
-
-                    <h4> Owner : @Model.OwnerUser.DisplayName</h4>
-
-                    <h4> Assigned User : @Model.AssignedToUser.DisplayName</h4>
-
-                    <h4> Ticket Description : @Model.Description</h4>
-
+                <div class="alert alert-primary alert-white rounded">
+                    <div class="icon"><i class="fa fa-info-circle"></i></div>
+                    <strong>Status : @Model.TicketStatus.Name</strong>
                 </div>
 
-                <hr />
-
-                @if (@Model.TicketComments.Count > 0)
-                {
-                    <div class="row">
-                        <h4>Comments Posted On This Post </h4>
-                        <hr>
-                    </div>
-
-                    foreach (var c in @Model.TicketComments)
-                    {
-                        <div class="row">
-                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
-
-                            <h2>
-                                @c.User.DisplayName
-                            </h2>
-
-                            <h2>
-                                @c.Comment
-                            </h2>
-
-                        </div>
-                        <hr />
-                    }
-                }
-
-                @if (@Model.TicketAttachments.Count > 0)
-                {
-                    <div class="row">
-                        <h4>Attachments Posted On This Post</h4>
-                        <hr>
-
-                    </div>
-
-                    foreach (var c in @Model.TicketAttachments)
-                    {
-                        <div class="row">
-                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
-
-                            <h4>@c.User.DisplayName</h4>
-                            <h4>@c.Decsription</h4>
-
-                            @if (c.FilePath != null)
-                            {
-                                <h4 class="text-danger"><a href=@Url.Content(c.FilePath)>Click To Open File</a></h4>
-                                @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
-                            }
-
-                        </div>
-                    }
-                }
 
             </div>
-
         </div>
     </div>
 </div>

@@ -4328,7 +4328,6 @@
     <Content Include="images\small-icons\readme.rtf" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Tickets\Index - Copy.cshtml" />
-    <Content Include="Views\Tickets\Details - Copy.cshtml" />
     <Content Include="Views\Shared\_TicketsIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,124 @@
+﻿@model BugTracker.Models.Ticket
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Details";
+}
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h4>Ticket Title : @Model.Title</h4>
+                <p><span class="glyphicon glyphicon-time"></span>Posted On @Model.Created.ToString("MM dd yyyy") </p>
+
+            </div>
+            <div class="content">
+
+                <div class="row">
+
+                    <h4> Ticket Title : @Model.Project.Name </h4>
+
+                    <h4> Ticket Type : @Model.TicketType.Name</h4>
+
+                    <h4> Ticket Priority : @Model.TicketPriority.Name</h4>
+
+                    <h4> Model.TicketStatus.Name)</h4>
+
+                    <h4> Owner : @Model.OwnerUser.DisplayName</h4>
+
+                    <h4> Assigned User : @Model.AssignedToUser.DisplayName</h4>
+
+                    <h4> Ticket Description : @Model.Description</h4>
+
+                </div>
+
+                <hr />
+
+                @if (@Model.TicketComments.Count > 0)
+                {
+                    <div class="row">
+                        <h4>Comments Posted On This Post </h4>
+                        <hr>
+                    </div>
+
+                    foreach (var c in @Model.TicketComments)
+                    {
+                        <div class="row">
+                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
+
+                            <h2>
+                                @c.User.DisplayName
+                            </h2>
+
+                            <h2>
+                                @c.Comment
+                            </h2>
+
+                        </div>
+                        <hr />
+                    }
+                }
+
+                @if (@Model.TicketAttachments.Count > 0)
+                {
+                    <div class="row">
+                        <h4>Attachments Posted On This Post</h4>
+                        <hr>
+
+                    </div>
+
+                    foreach (var c in @Model.TicketAttachments)
+                    {
+                        <div class="row">
+                            <p><span class="glyphicon glyphicon-time"></span>Posted On @c.Created.ToString("MM dd yyyy") </p>
+
+                            <h4>@c.User.DisplayName</h4>
+                            <h4>@c.Decsription</h4>
+
+                            @if (c.FilePath != null)
+                            {
+                                <h4 class="text-danger"><a href=@Url.Content(c.FilePath)>Click To Open File</a></h4>
+                                @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
+                            }
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+            <div class="col-sm-6 col-md-6">
+                <div class="tab-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                        <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                        <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active cont" id="home">
+                            <h3 class="hthin">Basic Tabs</h3>
+                            <p>This is an example of tabs navigation, you can change the tabs position and use them with icons if you like.</p>
+                        </div>
+                        <div class="tab-pane cont" id="profile">
+                            <h2>Typography</h2>
+                            <p>This is just an example of content writen by <b>Jeff Hanneman</b>, as you can see it is a clean design with large
+                        </div>
+                        <div class="tab-pane" id="messages">..sdfsdfsfsdf.</div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+    </div>
+</div>
+

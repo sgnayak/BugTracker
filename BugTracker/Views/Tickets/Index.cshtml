@@ -66,18 +66,9 @@
                                     <td>@item.Created.ToString("MM/dd/yy")</td>
                                      @*<td>@Html.DisplayFor(modelItem => item.Updated)</td>*@
                                     <td>@Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)</td>
-                                    <td>
+                                    <td data-id="@item.Id">
   
-                                        @*<div class="pull-right action-buttons">*@
-                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>*@
-                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id}) 
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
-                                            @Html.ActionLink("Comments", "Create", "TicketComments", new { id = item.Id }, null)*@
-
-                                            @*<a href="@Url.Action("Edit", "Tickets", new { id="item.Id" })" @class ="flag"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                                <a href=" @Url.Action("Delete", "Tickets", new { id = "item.Id"}) " class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                                <a href=" @Url.Action("Details", "Tickets", new { id="item.Id" }) " class="flag"><span class="glyphicon glyphicon-align-justify"></span></a>*@
-                                        @*</div>*@
+ 
 
                                     </td>
                                 </tr>
@@ -93,10 +84,8 @@
 
 <script type="text/javascript">
     //Add dataTable Functions
-    var functions = $('<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="@Url.Action("Edit", "Tickets", new { id="item.Id" })">Edit</a></li><li><a href="#">Copy</a></li><li><a href="#">Details</a></li><li class="divider"></li><li><a href="#">Remove</a></li></ul></div>');
     $("#datatable tbody tr td:last-child").each(function () {
-        $(this).html("");
-        functions.clone().appendTo(this);
+        $(this).html( '<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="/Tickets/Edit/' + $(this).data('id') + '">Edit</a></li><li><a href="#">Copy</a></li><li><a href="#">Details</a></li><li class="divider"></li><li><a href="#">Remove</a></li></ul></div>' );
     });
 
     $(document).ready(function () {

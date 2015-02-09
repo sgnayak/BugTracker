@@ -1,5 +1,95 @@
 ﻿    <!-- Extra Bar -->
 @model IEnumerable<BugTracker.Models.Ticket>
+
+
+<div class="modal fade" id="ticketsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            </div>
+            <div class="row">
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <h4>New Ticket Items Added</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="projectsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            </div>
+            <div class="row">
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <h4>New Ticket Items Added</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="commentsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            </div>
+            <div class="row">
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <h4>New Ticket Items Added</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rolesInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            </div>
+            <div class="row">
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <h4>New Ticket Items Added</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+        </div>
+    </div>
+</div>
+
 <div class="cl-mcont">
     <div class="row">
 
@@ -7,7 +97,9 @@
             <div class="fd-tile detail clean tile-purple">
                 <div class="content"><h1 class="text-left">@ViewBag.NewTicketCount</h1><p>New Tickets</p></div>
                 <div class="icon"><i class="fa fa-bug"></i></div>
-                <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                @*<a class="details" href="@Url.Action("", "", new {@data-toggle = "modal", @data-target = "ticketsInfo" }) ">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>*@
+
+                <a class="details" href="#" data-toggle = "modal", data-target = "#ticketsInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -16,7 +108,7 @@
             <div class="fd-tile detail clean tile-green">
                 <div class="content"><h1 class="text-left">@ViewBag.NotificationCount</h1><p>New Comments</p></div>
                 <div class="icon"><i class="fa fa-comments"></i></div>
-                <a class="details" href="@Url.Action("Create", "TicketComments")">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="#" data-toggle="modal" , data-target="#commentsInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -25,8 +117,8 @@
         <div class="col-md-3 col-sm-6">
             <div class="fd-tile detail clean tile-prusia">
                 <div class="content"><h1 class="text-left">@ViewBag.ProjectsCount</h1><p>Projects</p></div>
-                <div class="icon"><i class="fa fa-apple"></i></div>
-                <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <div class="icon"><i class="fa fa-cogs"></i></div>
+                <a class="details" href="#" data-toggle="modal" , data-target="#projectsInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -34,7 +126,7 @@
             <div class="fd-tile detail clean tile-red">
                 <div class="content"><h1 class="text-left">@ViewBag.Role</h1><p>Your Role Priviledge</p></div>
                 <div class="icon"><i class="fa fa-user"></i></div>
-                <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="#" data-toggle="modal" , data-target="#rolesInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -99,5 +191,7 @@
         </div>
     </div>*@
 </div>
+
+
 
 

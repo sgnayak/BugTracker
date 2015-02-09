@@ -57,3 +57,4 @@ C:\Users\satyanayak\Documents\Github\Visual Studio 2013\Projects\BugTracker\BugT
 C:\Users\satyanayak\Documents\Github\Visual Studio 2013\Projects\BugTracker\BugTracker\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\satyanayak\Documents\Github\Visual Studio 2013\Projects\BugTracker\BugTracker\obj\Debug\BugTracker.dll
 C:\Users\satyanayak\Documents\Github\Visual Studio 2013\Projects\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
+C:\Users\satyanayak\Documents\Github\Visual Studio 2013\Projects\BugTracker\BugTracker\obj\Debug\BugTracker.csprojResolveAssemblyReference.cache
