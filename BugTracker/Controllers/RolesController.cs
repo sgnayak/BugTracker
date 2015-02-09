@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BugTracker.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections;
+using BugTracker.Models;
 
 namespace BugTracker.Controllers
 {
@@ -22,23 +23,23 @@ namespace BugTracker.Controllers
 
             ApplicationDbContext db = new ApplicationDbContext();
 
-            var adminId = db.Roles.Single(r=>r.Name == "Admin").Id;
-            var projectManagerId = db.Roles.Single(r=>r.Name == "Project Manager").Id;
-            var developerId = db.Roles.Single(r=>r.Name == "Developer").Id;
-            var SubmitterId = db.Roles.Single(r=>r.Name == "Submitter").Id;
+            var adminId = db.Roles.Single(r => r.Name == "Admin").Id;
+            var projectManagerId = db.Roles.Single(r => r.Name == "Project Manager").Id;
+            var developerId = db.Roles.Single(r => r.Name == "Developer").Id;
+            var SubmitterId = db.Roles.Single(r => r.Name == "Submitter").Id;
 
-            foreach(var user in db.Users.ToList())
+            foreach (var user in db.Users.ToList())
             {
-                var urvm = new UserRoleViewModel 
-                { 
+                var urvm = new UserRoleViewModel
+                {
                     userId = user.Id,
                     name = user.DisplayName,
-                    admin = user.Roles.Any(r=>r.RoleId == adminId),
-                    projectManager = user.Roles.Any(r=>r.RoleId == projectManagerId),
-                    developer = user.Roles.Any(r=>r.RoleId == developerId),
-                    submitter = user.Roles.Any(r=>r.RoleId == SubmitterId)
+                    admin = user.Roles.Any(r => r.RoleId == adminId),
+                    projectManager = user.Roles.Any(r => r.RoleId == projectManagerId),
+                    developer = user.Roles.Any(r => r.RoleId == developerId),
+                    submitter = user.Roles.Any(r => r.RoleId == SubmitterId)
                 };
-                roles.Add(urvm);   
+                roles.Add(urvm);
             }
 
             return View(roles);
@@ -50,7 +51,7 @@ namespace BugTracker.Controllers
         public ActionResult Index(RolesViewModels model)
         {
             var testRole = model;
-      //      ViewBag.Message = "The value of Select is " + AdminSelected + DeveloperSelected + ProjectManagerSelected + SubmitterSelected ?? "";
+            //      ViewBag.Message = "The value of Select is " + AdminSelected + DeveloperSelected + ProjectManagerSelected + SubmitterSelected ?? "";
             return View();
         }
 
@@ -93,9 +94,9 @@ namespace BugTracker.Controllers
             var testRole = UserId;
             var helper = new UserRolesHelper();
 
-            if (AdminSelected == "on") 
-            { 
-               helper.AddUserRole(UserId,"Admin");
+            if (AdminSelected == "on")
+            {
+                helper.AddUserRole(UserId, "Admin");
             }
             else
             {
@@ -127,7 +128,7 @@ namespace BugTracker.Controllers
             }
 
             return RedirectToAction("ListUsers");
-  //          return View("ListUsers");
+            //          return View("ListUsers");
         }
 
 
@@ -145,7 +146,7 @@ namespace BugTracker.Controllers
                 Selected = userRoles.Contains(x)
             }).ToArray();
 
-            var model = new ChooseRoleModel{Roles = roles, Username = username};
+            var model = new ChooseRoleModel { Roles = roles, Username = username };
 
             return PartialView("Partials/ChooseRolePartial", model);
         }
@@ -157,10 +158,54 @@ namespace BugTracker.Controllers
             return View("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditUserRoles(List<UserRoleViewModel> users)
         {
+            UserRolesHelper uRoleHelper = new UserRolesHelper();
+            var usersInAdminRole = uRoleHelper.UsersInRoles("Admin");
+            var adminCount = usersInAdminRole.Count();
 
+            foreach (var c in users)
+            {
+                var helper = new UserRolesHelper();
+                if (c.admin)
+                {
+                    helper.AddUserRole(c.userId, "Admin");
+                }
+                else
+                {
+                    if (adminCount > 0)
+                    {
+                        helper.RemoveUserRole(c.userId, "Admin");
+                        adminCount--;
+                    }
+                }
+                if (c.projectManager)
+                {
+                    helper.AddUserRole(c.userId, "Project Manager");
+                }
+                else
+                {
+                    helper.RemoveUserRole(c.userId, "Project Manager");
+                }
+                if (c.developer)
+                {
+                    helper.AddUserRole(c.userId, "Developer");
+                }
+                else
+                {
+                    helper.RemoveUserRole(c.userId, "Developer");
+                }
+                if (c.submitter)
+                {
+                    helper.AddUserRole(c.userId, "Submitter");
+                }
+                else
+                {
+                    helper.RemoveUserRole(c.userId, "Submitter");
+                }
+            }
             return RedirectToAction("ListUsers");
         }
     }

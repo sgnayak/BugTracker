@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using BugTracker.Models;
 using System.IO;
 using Microsoft.AspNet.Identity;
+using BugTracker.Models;
 
 namespace BugTracker.Models
 {
@@ -19,23 +20,15 @@ namespace BugTracker.Models
 
         public int GetUserNotifications(string currentUserId)
         {
-            int count = 21;
+            int count = 0;
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                if (true)
-                {
-                    count = 23;
-                }
-                else
-                {
                     count = _db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
-                }
-
             }
             else
             {
-                count = 25;
+                count = 5;
             }
             return (count);
         }
@@ -65,47 +58,52 @@ namespace BugTracker.Models
 
         public int GetUserProjectsCount(string currentUserId)
         {
-            int count = 21;
+            int count = 0;
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                if (true)
-                {
-                    count = 23;
-                }
-                else
-                {
-                    count = _db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
-                }
-
+                count = _db.Users.FirstOrDefault(u => u.Id == currentUserId).Projects.Count();
             }
             else
             {
-                count = 25;
+                count = 5;
             }
             return (count);
         }
 
         public string GetUserRole(string currentUserId)
         {
-            string role = "Admin";
+            UserRolesHelper uRoleHelper = new UserRolesHelper();
+            string role = "Submitter";
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                if (true)
+                var roles = uRoleHelper.ListUserRoles(currentUserId);
+                foreach (string myRole in roles)
                 {
-                    role = "Admin";
+                    if (myRole == "Admin")
+                    {
+                        role = "Admin";
+                    }
+                    else if (myRole == "Developer")
+                    {
+                        role = "Developer";
+                    }
+                    else if (myRole == "Project Manager")
+                    {
+                        role = "Manager";
+                    }
+                    else
+                    {
+                        role = "Submitter";
+                    }
                 }
-                else
-                {
-                    role = "Admin";
-                }
-
             }
             else
             {
-                role = "Admin";
+                role = "Submitter";
             }
+
             return (role);
         }
 

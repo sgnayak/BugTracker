@@ -4,52 +4,51 @@
 }
 
 
-<div class="wrapper">
-    <div class="container intro">
-        <div class="row">
-            <h2>Project Assignment</h2>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                @using (Html.BeginForm("AssignProjectsToUser", "Projects", new { UserId = Model.UserId, UserName = Model.UserName }, FormMethod.Post))
-                {
-                    @*@Html.HiddenFor(m => Model.availableProjects)*@
-                    @*@Html.ListBoxFor(m => Model.selectedProjects, Model.notAssignedProjects as MultiSelectList, new { style = "width: 200px; height:221px; border:4px solid #d8d8d8; background:transparent;", })*@
-                    @Html.ListBoxFor(m => Model.selectedNotAssignedProjects, Model.notAssignedProjects as MultiSelectList, new { @class = "form-control, form-group", style = "width: 200px; height:250px;" })
-
-
-
-                    @*<input type="submit" name="addButton" value="Add" class="btn-primary" />*@
-                    @*<a class="btn btn-primary btn-sm" href="@Url.Action("AssignProjectsToUser", "Projects", new { id = Model.UserId })">Add </a>*@
-
-                    <a><h4><input class="btn-primary pull-left right" type="Submit" name="addButton" value="Add To Projects" /></h4></a>
-                }
+<div class="page-head"> @Html.ActionLink("Create New Project", "Create") </div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Projects User Table</h3>
             </div>
+            <div class="content">
 
-            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("AssignProjectsToUser", "Projects", new { UserId = Model.UserId, UserName = Model.UserName }, FormMethod.Post))
+                        {
+                            @*@Html.HiddenFor(m => Model.availableProjects)*@
+                            @*@Html.ListBoxFor(m => Model.selectedProjects, Model.notAssignedProjects as MultiSelectList, new { style = "width: 200px; height:221px; border:4px solid #d8d8d8; background:transparent;", })*@
+                            @Html.ListBoxFor(m => Model.selectedNotAssignedProjects, Model.notAssignedProjects as MultiSelectList, new { @class = "form-control, form-group", style = "width: 225px; height:250px;" })
 
-                @using (Html.BeginForm("RemoveProjectsFromUser", "Projects", new { UserId = Model.UserId, UserName = Model.UserName }, FormMethod.Post))
-                {
-                    @*@Html.HiddenFor(m => Model.availableProjects)*@
-                    @*@Html.ListBoxFor(m => Model.selectedProjects, Model.notAssignedProjects as MultiSelectList, new { style = "width: 200px; height:221px; border:4px solid #d8d8d8; background:transparent;", })*@
-                    @Html.ListBoxFor(m => Model.selectedAssignedProjects, Model.assignedProjects as MultiSelectList, new { @class = "form-control, form-group", style = "width: 200px; height:250px;" })
+
+
+                            @*<input type="submit" name="addButton" value="Add" class="btn-primary" />*@
+                            @*<a class="btn btn-primary btn-sm" href="@Url.Action("AssignProjectsToUser", "Projects", new { id = Model.UserId })">Add </a>*@
+
+                            <a><h4><input class="btn-primary pull-left right" type="Submit" name="addButton" value="Add To Projects" /></h4></a>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+
+                        @using (Html.BeginForm("RemoveProjectsFromUser", "Projects", new { UserId = Model.UserId, UserName = Model.UserName }, FormMethod.Post))
+                        {
+                            @*@Html.HiddenFor(m => Model.availableProjects)*@
+                            @*@Html.ListBoxFor(m => Model.selectedProjects, Model.notAssignedProjects as MultiSelectList, new { style = "width: 200px; height:221px; border:4px solid #d8d8d8; background:transparent;", })*@
+                            @Html.ListBoxFor(m => Model.selectedAssignedProjects, Model.assignedProjects as MultiSelectList, new { @class = "form-control, form-group", style = "width: 225px; height:250px;" })
 
 
 
-                    @*<input type="submit" name="addButton" value="Add" class="btn-primary" />*@
-                    @*<a class="btn btn-primary btn-sm" href="@Url.Action("AssignProjectsToUser", "Projects", new { id = Model.UserId })">Add </a>*@
+                            @*<input type="submit" name="addButton" value="Add" class="btn-primary" />*@
+                            @*<a class="btn btn-primary btn-sm" href="@Url.Action("AssignProjectsToUser", "Projects", new { id = Model.UserId })">Add </a>*@
 
-                    <a><h4><input class="btn-primary pull-left right" type="Submit" name="removeButton" value="Remove From Projects" /></h4></a>
-                }
+                            <a><h4><input class="btn-primary pull-left right" type="Submit" name="removeButton" value="Remove From Projects" /></h4></a>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-
-
     </div>
-
-
-
-</div>
 </div>
 

@@ -3,35 +3,57 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="wrapper">
-    <div class="container intro">
-        <h2>Index</h2>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th></th>
-            </tr>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //initialize the javascript
+        //Basic Instance
+        $("#table_id_projects").dataTable();
+        //Search input style
+        $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');
+        $('.dataTables_length select').addClass('form-control');
+    }
+    );
+</script>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
-            }
-
-        </table>
+<div class="page-head"> @Html.ActionLink("Create New Project", "Create") </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Projects User Table</h3>
+            </div>
+            <div class="content">
+                <div class="table-responsive">
+                    <div class="wrapper">
+                        <div class="container intro">
+                            <table class="table" id="table_id_projects">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

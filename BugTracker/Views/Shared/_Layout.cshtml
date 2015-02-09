@@ -72,50 +72,6 @@
 
 
 
-    @*  ***************************************************         DATATABLE   ******************************************************** *@
-    @*<!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
-
-        <!-- jQuery -->
-        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-
-        <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>*@
-
-
-    <!-- DataTables CSS -->
-    @*<link rel="stylesheet" type="text/css" href="~/css/DataTables-1.10.4/css/jquery.dataTables.css">
-
-        <!-- jQuery -->
-        <script type="text/javascript" charset="utf8" src="~/js/jquery-1.10.2.min.js"></script>
-
-        <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="~/js/DataTables-1.10.4/jquery.dataTables.js"></script>*@
-    @*<script type="text/javascript" charset="utf8" src="~/js/jquery.datatables/jquery.dataTables.min.js"></script>*@
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#table_id').DataTable();
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#datatable11').DataTable();
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#table_id_roles').DataTable();
-        });
-    </script>
-
-
-
-    @*  ***************************************************         DATATABLE   ******************************************************** *@
-
 </head>
 
 
@@ -150,8 +106,7 @@
                             <li>
                                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i><span>Home</span></a>
                                 <ul class="sub-menu">
-                                    <li class="active"><a href="@Url.Action("Index", "Tickets")">All Tickets</a></li>
-                                    <li class="active"><a href="@Url.Action("Create", "Tickets")">Create</a></li>
+                                    <li class="active"><a href="@Url.Action("Index", "Home")">User Home</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -166,6 +121,7 @@
                                 <ul class="sub-menu">
                                     <li class="active"><a href="@Url.Action("Index", "Projects")">All Projects</a></li>
                                     <li class="active"><a href="@Url.Action("AssignProjectsToUser", "Projects")">Assign Project</a></li>
+                                    <li class="active"><a href="@Url.Action("ListProjectsAndUsers", "Projects")">Project and Users</a></li>
                                 </ul>
                             </li>
                             <li>
