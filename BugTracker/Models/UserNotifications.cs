@@ -35,19 +35,12 @@ namespace BugTracker.Models
 
         public int GetNewUserTicketCount(string currentUserId)
         {
-            int count = 21;
+            int count = 0;
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                if (true)
-                {
-                    count = 23;
-                }
-                else
-                {
-                    count = _db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
-                }
-
+                //count = _db.Tickets.Include(u => u.OwnerUserId == currentUserId).ToList().Count;
+                count = 11;
             }
             else
             {
@@ -84,18 +77,22 @@ namespace BugTracker.Models
                     if (myRole == "Admin")
                     {
                         role = "Admin";
+                        break;
                     }
                     else if (myRole == "Developer")
                     {
                         role = "Developer";
+                        break;
                     }
                     else if (myRole == "Project Manager")
                     {
                         role = "Manager";
+                        break;
                     }
                     else
                     {
                         role = "Submitter";
+                        break;
                     }
                 }
             }

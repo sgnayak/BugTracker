@@ -18,6 +18,7 @@ namespace BugTracker.Controllers
             ViewBag.Name = "Layout Notifications";
             ViewBag.NotificationCount = userNote.GetUserNotifications(currentUserId);
             ViewBag.ProjectsCount = userNote.GetUserProjectsCount(currentUserId);
+            ViewBag.NewTicketCount = userNote.GetNewUserTicketCount(currentUserId);
 
             ViewBag.Role = userNote.GetUserRole(currentUserId);
             var tickets = userNote.GetRecentTickets();
