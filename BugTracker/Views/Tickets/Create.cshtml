@@ -3,11 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
-<link rel="stylesheet" type="text/css" href="~/js/bootstrap.wysihtml5/dist/bootstrap3-wysihtml5.min.css">
-<link rel="stylesheet" type="text/css" href="~/js/bootstrap.summernote/dist/summernote.css" />
-<script type="text/javascript" src="~/js/bootstrap.summernote/dist/summernote.min.js"></script>
-<script type="text/javascript" src="~/js/bootstrap.wysihtml5/dist/wysihtml5-0.3.0.js"></script>
-<script type="text/javascript" src="~/js/bootstrap.wysihtml5/dist/bootstrap3-wysihtml5.all.min.js"></script>
+
 <script src="~/js/ckeditor/ckeditor.js"></script>
 <script src="~/js/ckeditor/adapters/jquery.js"></script>
 
@@ -16,8 +12,10 @@
 <div class="page-head">
     <ol class="breadcrumb">
         <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
-        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
-        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments")">Create Comment</a></li>
+        <li><a href="@Url.Action("Create", "TicketAttachments")">Attach Files</a></li>
+        @*<li><a href="@Url.Action("Create", "TicketComments", new { Id = @Model.Id })">Create Comment</a></li>
+        <li><a href="@Url.Action("Create", "TicketAttachments", new { Id = @Model.Id })">Attach Files</a></li>*@
     </ol>
 </div>
 
@@ -55,23 +53,11 @@
                                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-8">
 
-                                    @*<div class="block-flat">
-                                            <div class="header">
-                                                <h3>Bootstrap Wysihtml5</h3>
-                                            </div>
-                                            <div class="content">
-                                                <textarea style="height:150px;" class="form-control" id="some-textarea"></textarea>
-                                            </div>
-                                        </div>*@
-
-                                    @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Id = "CreateDesc", @style="height:150px"} })*@
-
                                     @Html.TextAreaFor(model => model.Description, new { id = "CreateDesc" })
                                     <script>
                                         CKEDITOR.replace("CreateDesc", { toolbar: "Basic" });
                                     </script>
 
-                                    @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
 

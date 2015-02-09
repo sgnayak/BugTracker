@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using BugTracker.Models;
 
 
 namespace BugTracker.Controllers
@@ -12,7 +13,13 @@ namespace BugTracker.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            UserNotifications userNote = new UserNotifications();
+            string currentUserId = User.Identity.GetUserId();
+            ViewBag.Name = "Layout Notifications";
+            ViewBag.NotificationCount = userNote.GetUserNotifications(currentUserId);
+            ViewBag.Role = userNote.GetUserRole(currentUserId);
+            var tickets = userNote.GetRecentTickets();
+            return View(tickets);
         }
 
         public ActionResult About()

@@ -6,6 +6,9 @@
 
 @*<div class="container-fluid" id="pcont">*@
 
+
+
+
 <div class="page-head"> @Html.ActionLink("Create New Ticket", "Create") </div>
 <div class="row">
     <div class="col-md-12">
@@ -15,7 +18,7 @@
             </div>
             <div class="content">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable-ticket">
+                    <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -24,9 +27,9 @@
                                 <th>Status</th>
                                 <th>Type</th>
                                 <th>Title</th>
-                                @*<th>Description</th>
+                                @*<th>Description</th>*@
                                     <th>Created</th>
-                                    <th>Updated</th>*@
+                                    @*<th>Updated</th>*@
                                 <th>Assigned-To</th>
                                 <th>Action</th>
                             </tr>
@@ -35,72 +38,46 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Project.Name)
-                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.OwnerUser.FirstName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Project.Name)</td>
                                     @{
-                                string color = "";
-                                if (item.TicketPriorityId == 2)
-                                {
-                                    color = "FFA07A";
-                                    color = "alert alert-info";
-                                }
-                                else if (item.TicketPriorityId == 1) //Low
-                                {
-                                    color = "20B2AA";
-                                    color = "alert alert-success";
-                                }
-                                else
-                                {
-                                    color = "FF6347";
-                                    color = "alert alert-danger";
-                                } // High
+                                        string color = "";
+                                        if (item.TicketPriorityId == 2)
+                                        {
+                                            color = "FFA07A";
+                                            color = "alert alert-info";
+                                        }
+                                        else if (item.TicketPriorityId == 1) //Low
+                                        {
+                                            color = "20B2AA";
+                                            color = "alert alert-success";
+                                        }
+                                        else
+                                        {
+                                            color = "FF6347";
+                                            color = "alert alert-danger";
+                                        } // High
                                     }
-
-                                    @*<td bgcolor="#@color">*@
-                                    <td class="@color">
-
-                                        @Html.DisplayFor(modelItem => item.TicketPriority.Name)
-                                    </td>
+                                    <td class="@color">@Html.DisplayFor(modelItem => item.TicketPriority.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TicketStatus.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TicketType.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Description)</td>*@
+                                    <td>@item.Created.ToString("MM/dd/yy")</td>
+                                     @*<td>@Html.DisplayFor(modelItem => item.Updated)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)</td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.TicketStatus.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TicketType.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Title)
-                                    </td>
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.Description)
-                                        </td>
-                                        <td>
-                                            @item.Created.ToString("MM/dd/yy")
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Updated)
-                                        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)
-                                    </td>
-                                    <td>
-                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id })*@
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                                        @*@Html.ActionLink("Attach", "Create", "TicketAttachments", new { id = item.Id }, null)*@
-
-                                        <div class="pull-right action-buttons">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>
+  
+                                        @*<div class="pull-right action-buttons">*@
+                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>*@
+                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id}) 
                                             @Html.ActionLink("Details", "Details", new { id = item.Id })
-                                            @Html.ActionLink("Comments", "Create", "TicketComments", new { id = item.Id }, null)
+                                            @Html.ActionLink("Comments", "Create", "TicketComments", new { id = item.Id }, null)*@
 
-                                            @*<a href="href="@Url.Action("Edit", "Tickets", new { id="item.Id" })" @class ="flag"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                                <a href="href=" @Url.Action("Delete", "Tickets", new { id = "item.Id"}) "" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                                <a href="href=" @Url.Action("Details", "Tickets", new { id="item.Id" }) "" class="flag"><span class="glyphicon glyphicon-align-justify"></span></a>*@
-                                        </div>
+                                            @*<a href="@Url.Action("Edit", "Tickets", new { id="item.Id" })" @class ="flag"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                                <a href=" @Url.Action("Delete", "Tickets", new { id = "item.Id"}) " class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                                                <a href=" @Url.Action("Details", "Tickets", new { id="item.Id" }) " class="flag"><span class="glyphicon glyphicon-align-justify"></span></a>*@
+                                        @*</div>*@
 
                                     </td>
                                 </tr>
@@ -113,4 +90,37 @@
     </div>
 </div>
 
+
+<script type="text/javascript">
+    //Add dataTable Functions
+    var functions = $('<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="@Url.Action("Edit", "Tickets", new { id="item.Id" })">Edit</a></li><li><a href="#">Copy</a></li><li><a href="#">Details</a></li><li class="divider"></li><li><a href="#">Remove</a></li></ul></div>');
+    $("#datatable tbody tr td:last-child").each(function () {
+        $(this).html("");
+        functions.clone().appendTo(this);
+    });
+
+    $(document).ready(function () {
+        //initialize the javascript
+        //Basic Instance
+        $("#datatable").dataTable();
+
+        //Search input style
+        $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');
+        $('.dataTables_length select').addClass('form-control');
+
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+            sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+            sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+            sOut += '</table>';
+
+            return sOut;
+        }
+
+
+    });
+</script>
 

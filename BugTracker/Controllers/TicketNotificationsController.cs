@@ -131,12 +131,5 @@ namespace BugTracker.Controllers
             base.Dispose(disposing);
         }
 
-
-        //public ActionResult GetCount()
-        //{
-        //   string currentUserId = User.Identity.GetUserId();
-        //    int count = db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
-        //    return PartialView(count);
-        //}
     }
 }

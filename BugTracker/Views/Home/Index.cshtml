@@ -1,12 +1,12 @@
 ﻿    <!-- Extra Bar -->
-
+@model IEnumerable<BugTracker.Models.Ticket>
 <div class="cl-mcont">
     <div class="row">
 
         <div class="col-md-3 col-sm-6">
             <div class="fd-tile detail clean tile-purple">
                 <div class="content"><h1 class="text-left">170</h1><p>New Tickets</p></div>
-                <div class="icon"><i class="fa fa-flag"></i></div>
+                <div class="icon"><i class="fa fa-bug"></i></div>
                 <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
@@ -14,9 +14,9 @@
 
         <div class="col-md-3 col-sm-6">
             <div class="fd-tile detail clean tile-green">
-                <div class="content"><h1 class="text-left">24</h1><p>New Comments</p></div>
+                <div class="content"><h1 class="text-left">@ViewBag.NotificationCount</h1><p>New Comments</p></div>
                 <div class="icon"><i class="fa fa-comments"></i></div>
-                <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="@Url.Action("Create", "TicketComments")">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -32,14 +32,18 @@
 
         <div class="col-md-3 col-sm-6">
             <div class="fd-tile detail clean tile-red">
-                <div class="content"><h1 class="text-left">72</h1><p>Your Role Priviledge</p></div>
-                <div class="icon"><i class="fa fa-eye"></i></div>
+                <div class="content"><h1 class="text-left">@ViewBag.Role</h1><p>Your Role Priviledge</p></div>
+                <div class="icon"><i class="fa fa-user"></i></div>
                 <a class="details" href="#">Details <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
     </div>
-    <div class="row">
+
+    @Html.Partial("_TicketsIndex", Model)
+
+
+    @*<div class="row">
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="header">
@@ -93,7 +97,7 @@
             </div>
 
         </div>
-    </div>
+    </div>*@
 </div>
 
 
