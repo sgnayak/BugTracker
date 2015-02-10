@@ -15,7 +15,7 @@
         <div class="block-flat">
             <div class="header">
                 <h3>Ticket Title : @Model.Title </h3>
-                <div class="alert-block" style="padding:3px;">
+                <div class="alert-block" style="padding:3px">
                     <h5 style="padding:1px; color:#816bb1"><strong> By @Model.OwnerUser.DisplayName</strong><span class="pull-right">Posted On @Model.Created.ToString("MMMM dd yyyy")</span></h5>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                                 <hr>
                                 foreach (var c in @Model.TicketAttachments)
                                 {
-                                    <h5 class="alert-primary" style="padding:1px;">Posted By : @c.User.DisplayName     <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
+                                    <h5 class="alert-primary" style="padding:1px">Posted By : @c.User.DisplayName     <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
                                     <h5>@c.Decsription</h5>
                                     if (c.FilePath != null)
                                     {
@@ -89,7 +89,7 @@
             <div class="header">
                 <div class="pull-right actions">
                 </div>
-                <h3>Ticket Info</h3>
+                <h3>Ticket Tags</h3>
             </div>
             <div class="content">
 

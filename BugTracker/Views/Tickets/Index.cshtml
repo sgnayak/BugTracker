@@ -66,11 +66,7 @@
                                     <td>@item.Created.ToString("MM/dd/yy")</td>
                                      @*<td>@Html.DisplayFor(modelItem => item.Updated)</td>*@
                                     <td>@Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)</td>
-                                    <td data-id="@item.Id">
-  
- 
-
-                                    </td>
+                                    <td data-id="@item.Id"></td>
                                 </tr>
                             }
                         </tbody>
@@ -85,7 +81,7 @@
 <script type="text/javascript">
     //Add dataTable Functions
     $("#datatable tbody tr td:last-child").each(function () {
-        $(this).html( '<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="/Tickets/Edit/' + $(this).data('id') + '">Edit</a></li><li><a href="#">Copy</a></li><li><a href="#">Details</a></li><li class="divider"></li><li><a href="#">Remove</a></li></ul></div>' );
+        $(this).html('<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="/Tickets/Edit/' + $(this).data('id') + '">Edit</a></li><li><a href="/Tickets/Details/' + $(this).data('id') + '">Detail</a></li><li><a href="/TicketComments/Create/' + $(this).data('id') + '">Add Comment</a></li></ul></div>');
     });
 
     $(document).ready(function () {
@@ -108,8 +104,6 @@
 
             return sOut;
         }
-
-
     });
 </script>
 

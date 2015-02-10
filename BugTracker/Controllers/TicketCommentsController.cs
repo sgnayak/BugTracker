@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTracker.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace BugTracker.Controllers
 {
@@ -37,11 +39,17 @@ namespace BugTracker.Controllers
         }
 
         // GET: TicketComments/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
-            return View();
+            //ViewBag.TicketId = new SelectList(db.Tickets.Select(t => t.Id == id), "Id", "Title");
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
+            TicketComment ticketComment = new TicketComment();
+            ticketComment.TicketId = id;
+            ticketComment.Ticket = db.Tickets.FirstOrDefault(t => t.Id == id);
+            var currentUser = User.Identity.GetUserId();
+            ticketComment.UserId = currentUser;
+            ticketComment.User = db.Users.FirstOrDefault(u => u.Id == currentUser);
+            return View(ticketComment);
         }
 
         // POST: TicketComments/Create
@@ -55,7 +63,7 @@ namespace BugTracker.Controllers
             {
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Tickets", new { id = ticketComment.TicketId });
             }
 
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);

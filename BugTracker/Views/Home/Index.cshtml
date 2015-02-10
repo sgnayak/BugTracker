@@ -2,92 +2,104 @@
 @model IEnumerable<BugTracker.Models.Ticket>
 
 
-<div class="modal fade" id="ticketsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+@*<div class="modal fade" id="ticketsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class=" modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+                <h4 class="modal-title block text-center" id="myModalLabel">New Tickets</h4>
             </div>
-            <div class="row">
-                <div class="modal-body">
-                    <div class="col-lg-12">
-                        <h4>New Ticket Items Added</h4>
-                    </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>Total Number of New Ticket Items Added</h4>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-            @*<button type="button" class="btn btn-primary">Save changes</button>*@
         </div>
     </div>
+    </div>*@
+
+
+
+
+<div class="modal fade" id="ticketsInfo" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h3>Total Ticket Counts</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>New Tickets that are assigned to you</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="projectsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="commentsInfo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            <div class="modal-header text-center">
+                <h3>Total New Comments Counts</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <div class="row">
-                <div class="modal-body">
-                    <div class="col-lg-12">
-                        <h4>New Ticket Items Added</h4>
-                    </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>New Comments that are added to your Tickets</h4>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-            @*<button type="button" class="btn btn-primary">Save changes</button>*@
-        </div>
-    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="commentsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="projectsInfo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            <div class="modal-header text-center">
+                <h3>Total Projects</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <div class="row">
-                <div class="modal-body">
-                    <div class="col-lg-12">
-                        <h4>New Ticket Items Added</h4>
-                    </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>Number of Projects you are currently working on</h4>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-            @*<button type="button" class="btn btn-primary">Save changes</button>*@
-        </div>
-    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="rolesInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="rolesInfo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">New Tickets</h4>
+            <div class="modal-header text-center">
+                <h3>Highest Role</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <div class="row">
-                <div class="modal-body">
-                    <div class="col-lg-12">
-                        <h4>New Ticket Items Added</h4>
-                    </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>Displays highest role you are assigned to Admin > Project Manager > Developer > Submitter</h4>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-            @*<button type="button" class="btn btn-primary">Save changes</button>*@
-        </div>
-    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 <div class="cl-mcont">
@@ -99,7 +111,7 @@
                 <div class="icon"><i class="fa fa-bug"></i></div>
                 @*<a class="details" href="@Url.Action("", "", new {@data-toggle = "modal", @data-target = "ticketsInfo" }) ">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>*@
 
-                <a class="details" href="#" data-toggle = "modal", data-target = "#ticketsInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+                <a class="details" href="#" data-toggle="modal" , data-target="#ticketsInfo">Details<span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
             </div>
         </div>
 
@@ -136,60 +148,60 @@
 
 
     @*<div class="row">
-        <div class="col-md-12">
-            <div class="block-flat">
-                <div class="header">
-                    <h3>Visitors</h3>
-                </div>
-                <div class="content full-width">
-                    <div id="chart3-legend" class="legend-container"></div>
-                    <div id="chart3" style="height: 180px;"></div>
-                    <div class="counter-detail">
-                        <div class="counter"><div class="spk1"></div><p>New Visitors</p><h5>146</h5></div>
-                        <div class="counter"><div class="spk2"></div><p>Old Visitors</p><h5>109</h5></div>
+            <div class="col-md-12">
+                <div class="block-flat">
+                    <div class="header">
+                        <h3>Visitors</h3>
+                    </div>
+                    <div class="content full-width">
+                        <div id="chart3-legend" class="legend-container"></div>
+                        <div id="chart3" style="height: 180px;"></div>
+                        <div class="counter-detail">
+                            <div class="counter"><div class="spk1"></div><p>New Visitors</p><h5>146</h5></div>
+                            <div class="counter"><div class="spk2"></div><p>Old Visitors</p><h5>109</h5></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="block-flat">
-                <div class="header">
-                    <h3>Tasks</h3>
-                </div>
-                <div class="content">
-                    <div class="table-responsive">
-                        <table class="no-border hover list">
-                            <tbody class="no-border-y">
-                                <tr class="items">
-                                    <td style="width: 10%;"><span class="label label-warning">Task</span></td>
-                                    <td><p><strong>Graphics</strong><span>description</span></p></td>
-                                    <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-warning" style="width: 80%">80%</div></div></td>
-                                    <td class="text-right" style="width: 15%;"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                                <tr class="items">
-                                    <td><span class="label label-danger">File</span></td>
-                                    <td><p><strong>Contact_form.psd</strong><span>description</span></p></td>
-                                    <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-danger" style="width: 60%">60%</div></div></td>
-                                    <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                                <tr class="items">
-                                    <td><span class="label label-success">Item</span></td>
-                                    <td><p><strong>Header</strong><span>description</span></p></td>
-                                    <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-success" style="width: 100%">100%</div></div></td>
-                                    <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                                <tr class="items">
-                                    <td><span class="label label-info">Social</span></td>
-                                    <td><p><strong>Social Networks</strong><span>description</span></p></td>
-                                    <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-info" style="width: 100%">100%</div></div></td>
-                                    <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="block-flat">
+                    <div class="header">
+                        <h3>Tasks</h3>
+                    </div>
+                    <div class="content">
+                        <div class="table-responsive">
+                            <table class="no-border hover list">
+                                <tbody class="no-border-y">
+                                    <tr class="items">
+                                        <td style="width: 10%;"><span class="label label-warning">Task</span></td>
+                                        <td><p><strong>Graphics</strong><span>description</span></p></td>
+                                        <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-warning" style="width: 80%">80%</div></div></td>
+                                        <td class="text-right" style="width: 15%;"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
+                                    </tr>
+                                    <tr class="items">
+                                        <td><span class="label label-danger">File</span></td>
+                                        <td><p><strong>Contact_form.psd</strong><span>description</span></p></td>
+                                        <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-danger" style="width: 60%">60%</div></div></td>
+                                        <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
+                                    </tr>
+                                    <tr class="items">
+                                        <td><span class="label label-success">Item</span></td>
+                                        <td><p><strong>Header</strong><span>description</span></p></td>
+                                        <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-success" style="width: 100%">100%</div></div></td>
+                                        <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
+                                    </tr>
+                                    <tr class="items">
+                                        <td><span class="label label-info">Social</span></td>
+                                        <td><p><strong>Social Networks</strong><span>description</span></p></td>
+                                        <td class="color-success"><div class="progress"><div class="progress-bar progress-bar-info" style="width: 100%">100%</div></div></td>
+                                        <td class="text-right"><a class="label label-default" href="#"><i class="fa fa-pencil"></i></a> <a class="label label-danger" href="#"><i class="fa fa-times"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </div>*@
+            </div>
+        </div>*@
 </div>
 
 

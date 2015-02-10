@@ -40,10 +40,17 @@ namespace BugTracker.Controllers
         }
 
         // GET: TicketAttachments/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title");
-            return View();
+
+            TicketAttachment ticketAttachment = new TicketAttachment();
+            ticketAttachment.TicketId = id;
+            ticketAttachment.Ticket = db.Tickets.FirstOrDefault(t => t.Id == id);
+            var currentUser = User.Identity.GetUserId();
+            ticketAttachment.UserId = currentUser;
+            ticketAttachment.User = db.Users.FirstOrDefault(u => u.Id == currentUser);
+            return View(ticketAttachment);
         }
 
         // POST: TicketAttachments/Create
@@ -71,7 +78,7 @@ namespace BugTracker.Controllers
 
                 db.TicketAttachments.Add(ticketAttachment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Tickets", new { id = ticketAttachment.TicketId });
             }
 
 

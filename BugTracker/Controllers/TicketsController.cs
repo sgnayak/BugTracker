@@ -28,6 +28,26 @@ namespace BugTracker.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult Search(string searchStr)
+        {
+            var result = db.Tickets.Where(p => p.Description.Contains(searchStr))
+                .Union(db.Tickets.Where(p => p.Title.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.TicketComments.Any(c => c.Comment.Contains(searchStr))))
+                .Union(db.Tickets.Where(p => p.TicketComments.Any(c => c.User.DisplayName.Contains(searchStr))))
+                .Union(db.Tickets.Where(p => p.TicketAttachments.Any(c => c.Decsription.Contains(searchStr))))
+                .Union(db.Tickets.Where(p => p.Project.Name.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.OwnerUser.DisplayName.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.AssignedToUser.DisplayName.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.TicketPriority.Name.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.TicketType.Name.Contains(searchStr)))
+                .Union(db.Tickets.Where(p => p.TicketStatus.Name.Contains(searchStr)))
+                ;
+            ViewData["myString"] = searchStr;
+
+            return View("Index",result.ToList());
+        }
+
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {
