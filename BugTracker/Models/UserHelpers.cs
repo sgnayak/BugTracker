@@ -35,7 +35,18 @@ namespace BugTracker.Models
 
         public IList<string> ListUserRoles(string userId)
         {
-            return (manager.GetRoles(userId));
+            string[] returnSub = {"Submitter"};
+            if (userId == null)
+            {
+                return (returnSub);
+            }
+            else
+            {
+
+                return (returnSub);
+
+    //            return (manager.GetRoles(userId));
+            }
         }
 
         public bool AddUserRole(string userId, string roleName)
@@ -177,12 +188,12 @@ namespace BugTracker.Models
         {
             var projectList = new List<Project>();
 
-     //       var user1 = db.Users.FirstOrDefault(u => u.Id == userId);
+            //       var user1 = db.Users.FirstOrDefault(u => u.Id == userId);
             var query =
                     from u in db.Users
                     where u.Id == userId
                     from pr in u.Projects
-              //      join pr in db.Users on u.UserId equals u.Id
+                    //      join pr in db.Users on u.UserId equals u.Id
                     select pr;
 
             projectList = query.ToList();

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System;
 
 namespace BugTracker.Models
 {
@@ -15,6 +16,8 @@ namespace BugTracker.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DisplayName { get; set; }
+        public Nullable<System.DateTimeOffset> TimeLastLogOn { get; set; }
+        public Nullable<System.DateTimeOffset> TimeLastLogOff { get; set; }
 
         // This was required in old version new Community Version This is not required.
         // As it picks up from DbSet

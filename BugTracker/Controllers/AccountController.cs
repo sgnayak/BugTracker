@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using BugTracker.Models;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace BugTracker.Controllers
 {
@@ -19,6 +20,8 @@ namespace BugTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
+
 
         public AccountController()
         {
@@ -81,7 +84,15 @@ namespace BugTracker.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                        ApplicationUser User = new ApplicationUser();
+                        User = db.Users.FirstOrDefault(u => u.Id == currentUser.Id);
+                        User.TimeLastLogOn = DateTimeOffset.Now;
+                        db.Entry(User).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -417,6 +428,12 @@ namespace BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+            //currentUser.LastLogOffx = DateTimeOffset.Now;
+            //db.Entry(currentUser).State = EntityState.Modified;
+            //db.SaveChanges();
+
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }

@@ -22,22 +22,41 @@ namespace BugTracker.Models
         //public Nullable<int> OldValue { get; set; }
         //public Nullable<int> NewValue { get; set; }
 
+        //Project
         public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
+
         public Nullable<int> OldProjectId { get; set; }
+        public string OldProjectName { get; set; }
 
+
+        //Type
         public int TicketTypeId { get; set; }
+        public string TicketTypeName { get; set; }
+
         public Nullable<int> OldTicketTypeId { get; set; }
+        public string OldTicketTypeName { get; set; }
 
+        // Priority
         public int TicketPriorityId { get; set; }
+        public string TicketPriorityName { get; set; }
+
         public Nullable<int> OldTicketPriorityId { get; set; }
+        public string OldTicketPriorityName { get; set; }
 
+        //Status
         public int TicketStatusId { get; set; }
+        public string TicketStatusName { get; set; }
+
         public Nullable<int> OldTicketStatusId { get; set; }
+        public string OldTicketStatusName { get; set; }
 
-        public string OwnerUserId { get; set; }
-
+        //Assigned to user
         public string AssignedToUserId { get; set; }
+        public virtual ApplicationUser AssignedToUser { get; set; }
+
         public string OldAssignedToUserId { get; set; }
+        public virtual ApplicationUser OldAssignedToUser { get; set; }
 
         public bool HideTicket { get; set; }
         public Nullable<bool> OldHideTicket { get; set; }

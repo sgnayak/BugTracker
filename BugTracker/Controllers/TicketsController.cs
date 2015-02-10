@@ -66,11 +66,8 @@ namespace BugTracker.Controllers
 
             // If the User is Currently Logged in and Ticket Notification for ticket id belongs to the person remove it
                 TicketNotification ticketNotification = new TicketNotification();
-                //ticketNotification.UserId = ticket.AssignedToUserId;
-                //ticketNotification.TicketId = ticket.Id;
-                //ticketNotification.TickedNew = false;
-                //ticketNotification.TicketChanged = false;
-                //db.TicketNotifications.Add(ticketNotification);
+
+
                 ticketNotification = db.TicketNotifications.FirstOrDefault(u => u.UserId == currentUserId && u.TicketId == ticket.Id);
                 if (ticketNotification != null)
                 {
@@ -208,13 +205,16 @@ namespace BugTracker.Controllers
                 lastTicket = db.Tickets.AsNoTracking().Single(t => t.Id == ticket.Id);
 
                 tHistory = addTicketHistories(newTicket, lastTicket);
-                tHistory.TicketId = ticket.Id;
+                tHistory.TicketId = newTicket.Id;
                 string currentUserId = User.Identity.GetUserId();
              //   tHistory.User = db.Users.FirstOrDefault(u => u.Id == currentUserId);
                 tHistory.UserId = currentUserId;
 
                 ticket.Updated = System.DateTime.Now;
+
                 db.TicketHistories.Add(tHistory);
+                db.SaveChanges();
+
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -268,22 +268,31 @@ namespace BugTracker.Controllers
             if (newT.ProjectId != oldT.ProjectId)
             {
                 myTHistory.OldProjectId = oldT.ProjectId;
+                myTHistory.OldProjectName = oldT.Project.Name;
                 myTHistory.ProjectId = newT.ProjectId;
+                myTHistory.ProjectName = db.Projects.FirstOrDefault(p => p.Id == newT.ProjectId).Name;
             }
             if (newT.TicketTypeId != oldT.TicketTypeId)
             {
                 myTHistory.OldTicketTypeId = oldT.TicketTypeId;
+                myTHistory.OldTicketTypeName = oldT.TicketType.Name;
                 myTHistory.TicketTypeId = newT.TicketTypeId;
+                myTHistory.TicketTypeName = db.TicketTypes.FirstOrDefault(tp => tp.Id == newT.TicketTypeId).Name;
             }
             if (newT.TicketPriorityId != oldT.TicketPriorityId)
             {
                 myTHistory.OldTicketPriorityId = oldT.TicketPriorityId;
+                myTHistory.OldTicketPriorityName = oldT.TicketPriority.Name;
                 myTHistory.TicketPriorityId = newT.TicketPriorityId;
+                myTHistory.TicketPriorityName = db.TicketPriorities.FirstOrDefault(tp => tp.Id == newT.TicketPriorityId).Name;
             }
             if (newT.TicketStatusId != oldT.TicketStatusId)
             {
                 myTHistory.OldTicketStatusId = oldT.TicketStatusId;
+                myTHistory.OldTicketStatusName = oldT.TicketStatus.Name;
                 myTHistory.TicketStatusId = newT.TicketStatusId;
+                myTHistory.TicketStatusName = db.TicketStatuses.FirstOrDefault(s => s.Id == newT.TicketStatusId).Name;
+
             }
             if (newT.AssignedToUserId != oldT.AssignedToUserId)
             {

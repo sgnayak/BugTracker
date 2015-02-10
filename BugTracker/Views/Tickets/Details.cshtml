@@ -71,6 +71,123 @@
                         </div>
                         <div class="tab-pane cont" id="History">
 
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Project
+                                        </th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
+                                            Priority
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Assigned To Changed
+                                        </th>
+                                        <th>
+                                            Modified by User
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.TicketHistories)
+                                    {
+                                        <tr>
+                                            @{
+                                                string color1 = null;
+                                                if (item.OldProjectId == null)
+                                                {
+                                                    color1 = null;
+                                                }
+                                                else if (item.ProjectId != item.OldProjectId)
+                                                {
+                                                    color1 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color1">
+                                                @Html.DisplayFor(modelItem => item.ProjectName)
+                                                @Html.DisplayFor(modelItem => item.OldProjectName)
+                                            </td>
+                                            @{
+                                                string color2 = null;
+                                                if (item.OldTicketTypeId == null)
+                                                {
+                                                    color2 = null;
+                                                }
+                                                else if (item.TicketTypeId != item.OldTicketTypeId)
+                                                {
+                                                    color2 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color2">
+                                                @Html.DisplayFor(modelItem => item.TicketTypeName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketTypeName)
+                                            </td>
+                                            @{
+                                                string color3 = null;
+                                                if (item.OldTicketPriorityId == null)
+                                                {
+                                                    color3 = null;
+                                                }
+                                                else if (item.TicketPriorityId != item.OldTicketPriorityId)
+                                                {
+                                                    color3 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color3">
+                                                @Html.DisplayFor(modelItem => item.TicketPriorityName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketPriorityName)
+                                            </td>
+                                            @{                                    
+                                                string color4 = null;
+                                                if (item.OldTicketStatusId == null)
+                                                {
+                                                    color4 = null;
+                                                }
+                                                else 
+                                                if (item.TicketStatusId != item.OldTicketStatusId)
+                                                {
+                                                    color4 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color4">
+                                                @Html.DisplayFor(modelItem => item.TicketStatusName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketStatusName)
+                                            </td>
+                                            @{
+                                                string color5 = null;
+                                                if (item.OldAssignedToUserId == null)
+                                                {
+                                                    color5 = null;
+                                                }
+                                                else if (item.AssignedToUserId != item.OldAssignedToUserId)
+                                                {
+                                                    color5 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color5">
+                                                @Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)
+                                                @Html.DisplayFor(modelItem => item.OldAssignedToUser.DisplayName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.DisplayName)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+
+
+
+
                         </div>
                     </div>
                 </div>

@@ -19,8 +19,18 @@ namespace BugTracker.Controllers
         // GET: TicketNotifications
         public ActionResult Index()
         {
-            var ticketNotifications = db.TicketNotifications.Include(t => t.Ticket);
-            return View(ticketNotifications.ToList());
+            string currentUserId = User.Identity.GetUserId();
+            if (db.TicketNotifications.Where(t => t.UserId == currentUserId) == null)
+            {
+                ViewBag.UserNote = "No Notifications";
+            //    TicketNotification tn = new TicketNotification();
+                return View();
+            }
+            else
+            {
+                var ticketNotifications = db.TicketNotifications.Where(t => t.UserId == currentUserId);
+                return View(ticketNotifications.ToList());
+            }
         }
 
         // GET: TicketNotifications/Details/5

@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using BugTracker.Models;
 using System.IO;
 using Microsoft.AspNet.Identity;
-using BugTracker.Models;
 
 namespace BugTracker.Models
 {
@@ -37,10 +36,53 @@ namespace BugTracker.Models
         {
             int count = 0;
             //string currentUserId = User.Identity.GetUserId();
+            Nullable<System.DateTimeOffset> lastLogin;
+
+            if (!String.IsNullOrWhiteSpace(currentUserId))
+            {
+                var user = _db.Users.Find(currentUserId);
+
+                if (user != null)
+                {
+                    lastLogin = user.TimeLastLogOn;
+
+                    var tickets = user.Tickets;
+
+                    if (lastLogin != null)
+                    {
+                        if (tickets.Count > 0)
+                            count = tickets.Where(t => t.Created > lastLogin).Count();
+                    }
+                }
+            }
+            else
+            {
+                count = 25;
+            }
+            return (count);
+        }
+
+        public int GetNewUserCommentsCount(string currentUserId)
+        {
+            int count = 0;
+            //string currentUserId = User.Identity.GetUserId();
+            Nullable<System.DateTimeOffset> lastLogin;
+
             if (currentUserId != null)
             {
-                //count = _db.Tickets.Include(u => u.OwnerUserId == currentUserId).ToList().Count;
-                count = 11;
+                if ((_db.Users.FirstOrDefault(u => u.Id == currentUserId)) != null)
+                {
+                    lastLogin = _db.Users.FirstOrDefault(u => u.Id == currentUserId).TimeLastLogOn;
+
+                    if (lastLogin != null)
+                    {
+                        var currentUserComments = _db.TicketComments.Where(u => u.Ticket.AssignedToUserId == currentUserId);
+                        if (currentUserComments != null)
+                        {
+                            count = currentUserComments.OrderByDescending(t => t.Created > lastLogin).Count();
+                        }
+                    }
+                }
             }
             else
             {
@@ -55,7 +97,11 @@ namespace BugTracker.Models
             //string currentUserId = User.Identity.GetUserId();
             if (currentUserId != null)
             {
-                count = _db.Users.FirstOrDefault(u => u.Id == currentUserId).Projects.Count();
+                var userProjects = _db.Users.FirstOrDefault(u => u.Id == currentUserId);
+                    if(userProjects != null)
+                    {
+                        count = userProjects.Projects.Count();
+                    }
             }
             else
             {
