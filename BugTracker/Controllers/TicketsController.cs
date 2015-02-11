@@ -83,6 +83,8 @@ namespace BugTracker.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            Ticket ticket = new Ticket();
+
             UserRolesHelper Helper = new UserRolesHelper();
             var devId = db.Roles.Single(r => r.Name == "Developer").Id;
             var adminId = db.Roles.Single(r => r.Name == "Admin").Id;
@@ -90,14 +92,13 @@ namespace BugTracker.Controllers
       //      var devs = ticket.Project.Users.AsQueryable().Where(u => u.Roles.Any(r => r.RoleId == devId || r.RoleId == adminId || r.RoleId == pmId)).ToList();
             var allDevs = db.Users.AsQueryable().Where(u => u.Roles.Any(r => r.RoleId == devId)).ToList();
            
-
             //ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.AssignedToUserId = new SelectList(allDevs, "Id", "FirstName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatuses, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
-            return View();
+            return View(ticket);
         }
 
         // POST: Tickets/Create
@@ -190,19 +191,22 @@ namespace BugTracker.Controllers
                 //tHistory.OldValue = lastTicket.NewValue;
                 //lastTicket.NewValue = ticket.Id;
                 //tHistory.NewValue = null;
-                TicketNotification ticketNotification = new TicketNotification();
-                ticketNotification.UserId = ticket.AssignedToUserId;
-                ticketNotification.TicketId = ticket.Id;
-                ticketNotification.TickedNew = false;
-                ticketNotification.TicketChanged = true;
-                db.TicketNotifications.Add(ticketNotification);
-
-
 
                 Ticket newTicket = new Ticket();
                     newTicket = ticket;
                 Ticket lastTicket = new Ticket();
                 lastTicket = db.Tickets.AsNoTracking().Single(t => t.Id == ticket.Id);
+
+                // If the Assignment Changes in the Edit Create new Notification else create just history
+                if (newTicket.AssignedToUserId != lastTicket.AssignedToUserId)
+                {
+                    TicketNotification ticketNotification = new TicketNotification();
+                    ticketNotification.UserId = ticket.AssignedToUserId;
+                    ticketNotification.TicketId = ticket.Id;
+                    ticketNotification.TickedNew = false;
+                    ticketNotification.TicketChanged = true;
+                    db.TicketNotifications.Add(ticketNotification);
+                }
 
                 tHistory = addTicketHistories(newTicket, lastTicket);
                 tHistory.TicketId = newTicket.Id;

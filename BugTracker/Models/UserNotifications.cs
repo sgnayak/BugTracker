@@ -17,13 +17,15 @@ namespace BugTracker.Models
 
         private ApplicationDbContext _db = new ApplicationDbContext();
 
+        // Up Top Globe Total Notifications
         public int GetUserNotifications(string currentUserId)
         {
             int count = 0;
             //string currentUserId = User.Identity.GetUserId();
-            if (currentUserId != null)
+            ApplicationUser user = _db.Users.FirstOrDefault(u => u.Id == currentUserId);
+            if (user != null)
             {
-                    count = _db.TicketNotifications.Select(u => u.UserId == currentUserId).Count();
+                    count = user.TicketNotifications.Count;
             }
             else
             {
@@ -46,11 +48,11 @@ namespace BugTracker.Models
                 {
                     lastLogin = user.TimeLastLogOn;
 
-                    var tickets = user.Tickets;
+                    var tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId);
 
                     if (lastLogin != null)
                     {
-                        if (tickets.Count > 0)
+                        if (tickets.Count() > 0)
                             count = tickets.Where(t => t.Created > lastLogin).Count();
                     }
                 }

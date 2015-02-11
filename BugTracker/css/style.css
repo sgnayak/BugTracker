@@ -2546,6 +2546,11 @@ table.information > tbody > tr > td {
   border-color: #e05749;
   color: #fff;
 }
+.alert-yellow {
+  background-color: #ffc91c;
+  border-color: #ffc91c;
+  color: #fff;
+}
 /*Alert White*/
 .alert-white {
   background: #fff;
@@ -2603,6 +2608,11 @@ table.information > tbody > tr > td {
 .alert-white.alert-danger .icon:after {
   border-color: #e05749;
   background: #ea6153;
+}
+.alert-white.alert-yellow .icon,
+.alert-white.alert-yellow .icon:after {
+  border-color: #ffc91c;
+  background: #ffc91c;
 }
 .alert-white.alert-info .icon,
 .alert-white.alert-info .icon:after {

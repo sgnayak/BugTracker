@@ -4,7 +4,13 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+    </ol>
+</div>
 <div class="row">
     <div class="col-md-10">
         <div class="block-flat">
@@ -53,7 +59,7 @@
                     }
                 </div>
                 <div>
-                    @Html.ActionLink("Back to List", "Index")
+                    @*@Html.ActionLink("Back to List", "Index")*@
                 </div>
             </div>
         </div>

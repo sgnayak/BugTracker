@@ -11,12 +11,20 @@ namespace BugTracker.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Tour()
+        {
+            ViewBag.Message = "Your application Tour.";
+
+            return View();
+        }
+
         public ActionResult Index()
         {
             UserNotifications userNote = new UserNotifications();
             string currentUserId = User.Identity.GetUserId();
             ViewBag.Name = "Layout Notifications";
-            ViewBag.NotificationCount = userNote.GetUserNotifications(currentUserId);
+            var notCount = userNote.GetUserNotifications(currentUserId);
+            ViewBag.NotificationCount = notCount == null ? 0 : notCount;
             ViewBag.ProjectsCount = userNote.GetUserProjectsCount(currentUserId);
             ViewBag.NewTicketCount = userNote.GetNewUserTicketCount(currentUserId);
             ViewBag.NewComments = userNote.GetNewUserCommentsCount(currentUserId);

@@ -27,6 +27,8 @@ using System.ComponentModel;
             this.TicketHistories = new HashSet<TicketHistory>();
             this.TicketNotifications = new HashSet<TicketNotification>();
             this.HideTicket = false;
+            //this.OwnerUser = new ApplicationUser();
+            //this.AssignedToUser = new ApplicationUser();
         }
 
         public int Id { get; set; }
