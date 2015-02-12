@@ -12,16 +12,17 @@ using Microsoft.AspNet.Identity;
 
 namespace BugTracker.Models
 {
-    public class UserNotifications : Controller
+    public class NotificationsStatic
     {
 
         private ApplicationDbContext _db = new ApplicationDbContext();
 
         // Up Top Globe Total Notifications
-        public int GetUserNotifications(string currentUserId)
+        public static int GetUserNotificationsStatic(string currentUserId)
         {
             int count = 0;
             //string currentUserId = User.Identity.GetUserId();
+            ApplicationDbContext _db = new ApplicationDbContext();
             ApplicationUser user = _db.Users.FirstOrDefault(u => u.Id == currentUserId);
             if (user != null)
             {
@@ -152,18 +153,14 @@ namespace BugTracker.Models
             return (role);
         }
 
-        public List<Ticket> GetRecentTickets(string currentUserId)
+        public List<Ticket> GetRecentTickets()
         {
             //  Ticket ticket = new Ticket;
             //string currentUserId = User.Identity.GetUserId();
-            //ApplicationUser User = User.Identity.User();
             //var ticketsForCurrentUser = _db.Tickets.Include(u => u.OwnerUserId == currentUserId).ToList();
             //var tickets = ticketsForCurrentUser.OrderByDescending(u => u.Created).Take(10).ToList();
-            var tickets1 = _db.Tickets.OrderByDescending(u => u.Created).Take(10).ToList();
-            var tickets2 = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).OrderByDescending(t => t.Created).Take(10).ToList();
-            //var projects_for_pm = _db.Users.Where(u => u.Projects)
-
-            return tickets2;
+            var tickets = _db.Tickets.OrderByDescending(u => u.Created).Take(10).ToList();
+            return tickets;
         }
 
     }

@@ -5,63 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="row">
+    <div class="col-md-8">
+        <div class="block-flat">
+            <div class="header">
 
-<div>
-    <h4>TicketAttachment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ticket.Title)
-        </dt>
+                <div>
+                    <h4>TicketAttachment</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ticket.Title)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ticket.Title)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ticket.Title)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FilePath)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FilePath)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FilePath)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.FilePath)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Decsription)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Decsription)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Decsription)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Decsription)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Created)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Created)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.UserId)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FileUrl)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FileUrl)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FileUrl)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.FileUrl)
+                        </dd>
 
-    </dl>
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

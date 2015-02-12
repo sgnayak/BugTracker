@@ -5,36 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-head">
+    <ol class="breadcrumb">
+        @*<li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>*@
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="block-flat">
+            <div class="header">
+                <h2>Notifications</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Ticket Title
+                        </th>
+                        <th>
+                            User
+                        </th>
+                        <th>Delete</th>
+                    </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ticket.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th></th>
-    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ticket.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.DisplayName)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ticket.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.DisplayName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,10 +42,8 @@ namespace BugTracker.Models
             }
             else
             {
-
-                return (returnSub);
-
-    //            return (manager.GetRoles(userId));
+ //               return (returnSub);
+                return (manager.GetRoles(userId));
             }
         }
 

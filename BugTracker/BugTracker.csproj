@@ -199,6 +199,7 @@
     <Compile Include="Models\TicketStatus.cs" />
     <Compile Include="Models\TicketType.cs" />
     <Compile Include="Models\UserHelpers.cs" />
+    <Compile Include="Models\NotificationsStatic.cs" />
     <Compile Include="Models\UserNotifications.cs" />
     <Compile Include="Models\UserRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

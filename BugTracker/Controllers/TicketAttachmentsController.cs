@@ -74,8 +74,6 @@ namespace BugTracker.Controllers
                     ticketAttachment.FilePath=("~/TicketAttachment/" + fileName);
                 }
 
-
-
                 db.TicketAttachments.Add(ticketAttachment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Tickets", new { id = ticketAttachment.TicketId });

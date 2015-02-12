@@ -24,13 +24,13 @@ namespace BugTracker.Controllers
             string currentUserId = User.Identity.GetUserId();
             ViewBag.Name = "Layout Notifications";
             var notCount = userNote.GetUserNotifications(currentUserId);
-            ViewBag.NotificationCount = notCount == null ? 0 : notCount;
+            ViewBag.NotificationCount = notCount;
             ViewBag.ProjectsCount = userNote.GetUserProjectsCount(currentUserId);
             ViewBag.NewTicketCount = userNote.GetNewUserTicketCount(currentUserId);
             ViewBag.NewComments = userNote.GetNewUserCommentsCount(currentUserId);
 
             ViewBag.Role = userNote.GetUserRole(currentUserId);
-            var tickets = userNote.GetRecentTickets();
+            var tickets = userNote.GetRecentTickets(currentUserId);
             return View(tickets);
         }
 

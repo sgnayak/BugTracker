@@ -92,10 +92,40 @@
         <div class="jumbotron dark-box text-center">
             <h1 data-step="1" data-intro="This is a title, duh... ok that wasn't fun">Take a Tour</h1>
             <p class="lead" data-step="4" data-intro="Another step.">Take a little demonstration of Bug Tracker through different Roles.</p>
-            <a class="btn btn-rad btn-lg btn-primary" href="javascript:void(0);" onclick="javascript:introJs().start();">Admin Role</a>
-            <a class="btn btn-rad btn-lg btn-primary" href="javascript:void(0);" onclick="javascript:introJs().start();">Project Manager Role</a>
-            <a class="btn btn-rad btn-lg btn-primary" href="javascript:void(0);" onclick="javascript:introJs().start();">Developer Role</a>
-            <a class="btn btn-rad btn-lg btn-primary" href="javascript:void(0);" onclick="javascript:introJs().start();">Submitter Role</a>
+            <div class="row">
+                <div class="col-sm-3 col-sm-push-1">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {   @Html.AntiForgeryToken()
+                        <input type="hidden" name="Email" value="satyanayak@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />
+                        <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Admin" />
+                    }
+                </div>
+                <div class="col-sm-3">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {   @Html.AntiForgeryToken()
+                        <input type="hidden" name="Email" value="satyanayak@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />
+                        <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Project Manager" />
+                    }
+                </div>
+                <div class="col-sm-3">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {   @Html.AntiForgeryToken()
+                        <input type="hidden" name="Email" value="satyanayak@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />
+                        <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Developer" />
+                    }
+                </div>
+                <div class="col-sm-3 col-sm-pull-1">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {   @Html.AntiForgeryToken()
+                        <input type="hidden" name="Email" value="satyanayak@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />
+                        <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Submitter" />
+                    }
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -104,15 +134,19 @@
                         <h3>Description</h3>
                     </div>
                     <div class="content">
-                        <p>A bug tracking system or defect tracking system is a software application that keeps track of reported 
-                        software bugs in software development projects. It may be regarded as a type of issue tracking system. 
-                        A bug tracking system is usually a necessary component of a good software development infrastructure, and 
-                        consistent use of a bug or issue tracking system is considered one of the "hallmarks of a good software team.</p>
-                        <p>In this Bug Tracking Software I have focused on usability through attractive and friendly user interface. 
-                        It allows four user roles. Admin user has full access to all available actions such as adding and deleting 
-                        projects, tickets and modifying roles. Project Manager can create Projects and assign users to projects.
-                        Developers can edit ticket attributes as well as reassign tickets to another developer. Submitter is the lowest 
-                        priority. Submitter can only add ticket and comments.</p>
+                        <p>
+                            A bug tracking system or defect tracking system is a software application that keeps track of reported
+                            software bugs in software development projects. It may be regarded as a type of issue tracking system.
+                            A bug tracking system is usually a necessary component of a good software development infrastructure, and
+                            consistent use of a bug or issue tracking system is considered one of the "hallmarks of a good software team.
+                        </p>
+                        <p>
+                            In this Bug Tracking Software I have focused on usability through attractive and friendly user interface.
+                            It allows four user roles. Admin user has full access to all available actions such as adding and deleting
+                            projects, tickets and modifying roles. Project Manager can create Projects and assign users to projects.
+                            Developers can edit ticket attributes as well as reassign tickets to another developer. Submitter is the lowest
+                            priority. Submitter can only add ticket and comments.
+                        </p>
                     </div>
                 </div>
             </div>
