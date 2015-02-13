@@ -87,6 +87,9 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdSatya = userManager.FindByEmail("satyanayak@me.com").Id;
+            userManager.AddToRole(userIdSatya, "Admin");
+
 
             if (!context.Users.Any(u => u.Email == "avatar@me.com"))
             {
@@ -100,7 +103,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdAvatar = userManager.FindByEmail("avatar@me.com").Id;
+            userManager.AddToRole(userIdAvatar, "Developer");
             //Users for Project Apollow 13 
 
             if (!context.Users.Any(u => u.Email == "JimLovell@apollo13.com"))
@@ -111,10 +115,12 @@ namespace BugTracker.Migrations
                     LastName = "Lovell",
                     DisplayName = "Commander",
                     UserName = "JimLovell@apollo13.com",
-                    Email = "JimLovell@apollo13.com"
+                    Email =    "JimLovell@apollo13.com"
                 },
                 "Password-1");
             }
+            var userIdJim = userManager.FindByEmail("JimLovell@apollo13.com").Id;
+            userManager.AddToRole(userIdJim, "Developer");
 
             if (!context.Users.Any(u => u.Email == "JackSwigert@apollo13.com"))
             {
@@ -124,23 +130,27 @@ namespace BugTracker.Migrations
                     LastName = "Swigert",
                     DisplayName = "Pilot",
                     UserName = "JackSwigert@apollo13.com",
-                    Email = "JackSwigert@apollo13.com"
+                    Email =    "JackSwigert@apollo13.com"
                 },
                 "Password-1");
             }
+            var userIdJack = userManager.FindByEmail("JackSwigert@apollo13.com").Id;
+            userManager.AddToRole(userIdJack, "Submitter");
 
             if (!context.Users.Any(u => u.Email == "FredHaise@apollo13.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    FirstName = "Jack",
-                    LastName = "Swigert",
+                    FirstName = "Fred",
+                    LastName = "Haise",
                     DisplayName = "LunarPilot",
                     UserName = "FredHaise@apollo13.com",
-                    Email = "FredHaise@apollo13.com"
+                    Email =    "FredHaise@apollo13.com"
                 },
                 "Password-1");
             }
+            var userIdFred = userManager.FindByEmail("FredHaise@apollo13.com").Id;
+            userManager.AddToRole(userIdFred, "Developer");
 
             if (!context.Users.Any(u => u.Email == "GeneKranz@apollo13.com"))
             {
@@ -150,10 +160,13 @@ namespace BugTracker.Migrations
                     LastName = "Krantz",
                     DisplayName = "MissionControl",
                     UserName = "GeneKranz@apollo13.com",
-                    Email = "GeneKranz@apollo13.com"
+                    Email =    "GeneKranz@apollo13.com"
                 },
                 "Password-1");
             }
+            var userIdKranz = userManager.FindByEmail("GeneKranz@apollo13.com").Id;
+            userManager.AddToRole(userIdKranz, "Project Manager");
+
 
             // ********   Users for Project Seinfeld
 
@@ -165,10 +178,12 @@ namespace BugTracker.Migrations
                     LastName = "Seinfeld",
                     DisplayName = "Jeeerrry",
                     UserName = "JerrySeinfeld@seinfeld.com",
-                    Email = "JerrySeinfeld@seinfeld.com"
+                    Email =    "JerrySeinfeld@seinfeld.com"
                 },
                 "Password-1");
             }
+            var userIdJerry = userManager.FindByEmail("JerrySeinfeld@seinfeld.com").Id;
+            userManager.AddToRole(userIdJerry, "Project Manager");
 
             if (!context.Users.Any(u => u.Email == "MichaelRichards@seinfeld.com"))
             {
@@ -178,11 +193,12 @@ namespace BugTracker.Migrations
                     LastName = "Richards",
                     DisplayName = "Kramer",
                     UserName = "MichaelRichards@seinfeld.com",
-                    Email = "MichaelRichards@seinfeld.com"
+                    Email =    "MichaelRichards@seinfeld.com"
                 },
                 "Password-1");
             }
-
+            var userIdKramer = userManager.FindByEmail("MichaelRichards@seinfeld.com").Id;
+            userManager.AddToRole(userIdKramer, "Admin");
 
             if (!context.Users.Any(u => u.Email == "JasonAlexander@seinfeld.com"))
             {
@@ -192,10 +208,12 @@ namespace BugTracker.Migrations
                     LastName = "Alexander",
                     DisplayName = "George",
                     UserName = "JasonAlexander@seinfeld.com",
-                    Email = "JasonAlexander@seinfeld.com"
+                    Email =    "JasonAlexander@seinfeld.com"
                 },
                 "Password-1");
             }
+            var userIdGeorge = userManager.FindByEmail("JasonAlexander@seinfeld.com").Id;
+            userManager.AddToRole(userIdGeorge, "Developer");
 
             if (!context.Users.Any(u => u.Email == "JuliaDreyfus@seinfeld.com"))
             {
@@ -205,10 +223,13 @@ namespace BugTracker.Migrations
                     LastName = "Dreyfus",
                     DisplayName = "Elane",
                     UserName = "JuliaDreyfus@seinfeld.com",
-                    Email = "JuliaDreyfus@seinfeld.com"
+                    Email =    "JuliaDreyfus@seinfeld.com"
                 },
                 "Password-1");
             }
+            var userIdElane = userManager.FindByEmail("JuliaDreyfus@seinfeld.com").Id;
+            userManager.AddToRole(userIdElane, "Project Manager");
+
 
             if (!context.Users.Any(u => u.Email == "LaryDavid@seinfeld.com"))
             {
@@ -222,6 +243,9 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdLarry = userManager.FindByEmail("LaryDavid@seinfeld.com").Id;
+            userManager.AddToRole(userIdLarry, "Admin");
+
 
             if (!context.Users.Any(u => u.Email == "WayneKnight@seinfeld.com"))
             {
@@ -231,10 +255,13 @@ namespace BugTracker.Migrations
                     LastName = "Knight",
                     DisplayName = "Newman",
                     UserName = "WayneKnight@seinfeld.com",
-                    Email = "WayneKnight@seinfeld.com"
+                    Email =    "WayneKnight@seinfeld.com"
                 },
                 "Password-1");
             }
+            var userIdNewman = userManager.FindByEmail("WayneKnight@seinfeld.com").Id;
+            userManager.AddToRole(userIdNewman, "Submitter");
+
 
             // *********  Project Skunk Works
 
@@ -250,6 +277,9 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdBen = userManager.FindByEmail("BenRich@lockheed.com").Id;
+            userManager.AddToRole(userIdBen, "Admin");
+
 
             if (!context.Users.Any(u => u.Email == "KellyJohnson@lockheed.com"))
             {
@@ -263,6 +293,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdKelly = userManager.FindByEmail("KellyJohnson@lockheed.com").Id;
+            userManager.AddToRole(userIdKelly, "Admin");
 
             if (!context.Users.Any(u => u.Email == "JosephWare@lockheed.com"))
             {
@@ -276,7 +308,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdJoseph = userManager.FindByEmail("JosephWare@lockheed.com").Id;
+            userManager.AddToRole(userIdJoseph, "Submitter");
 
             if (!context.Users.Any(u => u.Email == "JamesSullivan@lockheed.com"))
             {
@@ -290,6 +323,9 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdJames = userManager.FindByEmail("JamesSullivan@lockheed.com").Id;
+            userManager.AddToRole(userIdJames, "Submitter");
+
 
             // project Orion
             if (!context.Users.Any(u => u.Email == "CleonLacefield@nasa.gov"))
@@ -304,6 +340,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdCleon = userManager.FindByEmail("CleonLacefield@nasa.gov").Id;
+            userManager.AddToRole(userIdCleon, "Admin");
 
             if (!context.Users.Any(u => u.Email == "LarryPrice@nasa.gov"))
             {
@@ -317,6 +355,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdPrice = userManager.FindByEmail("LarryPrice@nasa.gov").Id;
+            userManager.AddToRole(userIdPrice, "Project Manager");
 
             if (!context.Users.Any(u => u.Email == "BillJohns@nasa.gov"))
             {
@@ -330,6 +370,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
+            var userIdBill = userManager.FindByEmail("BillJohns@nasa.gov").Id;
+            userManager.AddToRole(userIdBill, "Developer");
 
             if (!context.Users.Any(u => u.Email == "GinaCuret@nasa.gov"))
             {
@@ -343,7 +385,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdGina = userManager.FindByEmail("GinaCuret@nasa.gov").Id;
+            userManager.AddToRole(userIdGina, "Project Manager");
 
             // *************Project Tesla *********
 
@@ -359,7 +402,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdElon = userManager.FindByEmail("ElonMusk@teslamotors.com").Id;
+            userManager.AddToRole(userIdElon, "Admin");
 
             if (!context.Users.Any(u => u.Email == "BradBuss@teslamotors.com"))
             {
@@ -373,7 +417,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdBrad = userManager.FindByEmail("BradBuss@teslamotors.com").Id;
+            userManager.AddToRole(userIdBrad, "Project Manager");
 
             if (!context.Users.Any(u => u.Email == "IraEhrenpreis@teslamotors.com"))
             {
@@ -387,7 +432,8 @@ namespace BugTracker.Migrations
                 },
                 "Password-1");
             }
-
+            var userIdIra = userManager.FindByEmail("IraEhrenpreis@teslamotors.com").Id;
+            userManager.AddToRole(userIdIra, "Developer");
 
             var projects = new List<Project>{
                             new Project { Name = "Apollo 13" },
@@ -410,9 +456,9 @@ namespace BugTracker.Migrations
             var projectTesla = context.Projects.Single(p => p.Name == "Tesla").Id;
 
 
-            var userId = userManager.FindByEmail("satyanayak@me.com").Id;
-            userManager.AddToRole(userId, "Admin");
-            userManager.AddToRole(userId, "Developer");
+            //var userIdSatya = userManager.FindByEmail("satyanayak@me.com").Id;
+            //userManager.AddToRole(userIdSatya, "Admin");
+            //userManager.AddToRole(userIdSatya, "Developer");
 
 
             var types = new List<TicketType>
@@ -478,8 +524,8 @@ namespace BugTracker.Migrations
                         ProjectId = projectApollo,
                         TicketTypeId = typeBug,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdJim,
+                        AssignedToUserId = userIdKranz,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      },  
@@ -487,12 +533,12 @@ namespace BugTracker.Migrations
                     new Ticket {
                         Title = "Can't attach a file to a ticket",
                         Description = "It will be nice to have an Oxigen tank that works. Defect was found on the oxygen tank",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectApollo,
                         TicketTypeId = typeImprovement,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdJack,
+                        AssignedToUserId = userIdKranz,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      }
@@ -516,8 +562,8 @@ namespace BugTracker.Migrations
                         ProjectId = projectSeinfeld,
                         TicketTypeId = typeImprovement,
                         TicketStatusId = statusClosed,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdJerry,
+                        AssignedToUserId = userIdJerry,
                         TicketPriority = priorityLow,
                         TicketRead = false
                      },  
@@ -525,12 +571,12 @@ namespace BugTracker.Migrations
                     new Ticket {
                         Title = "Bro Manzier",
                         Description = "Manzier  Fans of Seinfeld will remember the episode in which Kramer and Frank Costanza invented a men's bra. But the project froze because they couldn't agree on whether to call it a bro or a manzier",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectSeinfeld,
                         TicketTypeId = typeImprovement,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdElane,
+                        AssignedToUserId = userIdJerry,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      }
@@ -554,8 +600,8 @@ namespace BugTracker.Migrations
                         ProjectId = projectSkunk,
                         TicketTypeId = typeImprovement,
                         TicketStatusId = statusNotAssigned,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdKelly,
+                        AssignedToUserId = userIdJoseph,
                         TicketPriority = priorityLow,
                         TicketRead = false
                      },  
@@ -563,12 +609,12 @@ namespace BugTracker.Migrations
                     new Ticket {
                         Title = "U2 over USSR",
                         Description = "In July 1957, U.S. President Dwight D. Eisenhower requested permission from Pakistan's Prime Minister Huseyn Suhrawardy for the U.S. to establish a secret intelligence facility in Pakistan and for the U-2 spyplane to fly from Pakistan. The U-2 flew at altitudes that could not be reached by Soviet fighter jets of the era; it was believed to be beyond the reach of Soviet missiles as well. A facility established in Badaber (Peshawar Air Station), 10 miles (16 km) from Peshawar, was a cover for a major communications intercept operation run by the United States National Security Agency (NSA). Badaber was an excellent location because of its proximity to Soviet central Asia. This enabled the monitoring of missile test sites, key infrastructure and communications. The U-2 spy-in-the-sky was allowed to use the Pakistan Air Force portion of Peshawar Airport to gain vital photo intelligence in an era before satellite observation",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectSkunk,
                         TicketTypeId = typeUnknown,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdJoseph,
+                        AssignedToUserId = userIdBen,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      },
@@ -576,12 +622,12 @@ namespace BugTracker.Migrations
                     new Ticket {
                         Title = "SR 71 fastest plane ever built NickName BlackBird",
                         Description = "The SR-71 was designed for flight at over Mach 3 with a flight crew of two in tandem cockpits, with the pilot in the forward cockpit and the Reconnaissance Systems Officer (RSO) monitoring the surveillance systems and equipment from the rear cockpit.[20] The SR-71 was designed to minimize its radar cross-section, an early attempt at stealth design.[21] Finished aircraft were painted a dark blue, almost black, to increase the emission of internal heat and to act as camouflage against the night sky. The dark color led to the aircraft's call sign Blackbird.While the SR-71 carried electronic countermeasures to evade interception efforts, its greatest protection was its high speed and cruising altitude that made it almost invulnerable to the weapons of its day. Merely accelerating would typically be enough to evade a surface-to-air missile,[2] and the plane was faster than the Soviet Unions principal interceptor, the MiG-25.[22] During its service life, no SR-71 was shot down.",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectSkunk,
                         TicketTypeId = typeUnknown,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdKelly,
+                        AssignedToUserId = userIdJames,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      },
@@ -589,12 +635,12 @@ namespace BugTracker.Migrations
                     new Ticket {
                         Title = "SR 71 Reactivation request",
                         Description = "Due to unease over political situations in the Middle East and North Korea, the U.S. Congress re-examined the SR-71 beginning in 1993.[83] Rear Admiral Thomas F. Hall addressed the question of why the SR-71 was retired, saying it was under the belief that, given the time delay associated with mounting a mission, conducting a reconnaissance, retrieving the data, processing it, and getting it out to a field commander, that you had a problem in timelines that was not going to meet the tactical requirements on the modern battlefield. And the determination was that if one could take advantage of technology and develop a system that could get that data back real time... that would be able to meet the unique requirements of the tactical commander. Hall stated they were looking at alternative means of doing [the job of the SR-71].",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectSkunk,
                         TicketTypeId = typeUnknown,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdJames,
+                        AssignedToUserId = userIdSatya,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      }
@@ -617,12 +663,12 @@ namespace BugTracker.Migrations
                     {
                         Title = "New Human Module for Future Mission To Mars",
                         Description = "The Orion MPCV takes basic design elements from the Apollo Command Module that took astronauts to the moon, but its technology and capability are more advanced. It is designed to support long-duration deep space missions, with up to 21 days active crew time plus 6 months quiescent.[33] During the quiescent period crew life support would be provided by another module such as a Deep Space Habitat. The spacecraft's life support, propulsion, thermal protection and avionics systems are designed to be upgradeable as new technologies become available. The MPCV spacecraft includes both crew and service modules, and a spacecraft adaptor. The MPCVs crew module is larger than Apollos and can support more crew members for short or long-duration missions. The service module fuels and propels the spacecraft as well as storing oxygen and water for astronauts. The service modules structure is also being designed to provide locations to mount scientific experiments and cargo.",
-                        Created = System.DateTimeOffset.Now,
+                        Created = System.DateTimeOffset.UtcNow,
                         ProjectId = projectSeinfeld,
                         TicketTypeId = typeBug,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdBill,
+                        AssignedToUserId = userIdSatya,
                         TicketPriority = priorityMedium,
                         TicketRead = false
                      },  
@@ -634,13 +680,15 @@ namespace BugTracker.Migrations
                         ProjectId = projectSeinfeld,
                         TicketTypeId = typeUnknown,
                         TicketStatusId = statusInProgress,
-                        OwnerUserId = userId,
-                        AssignedToUserId = userId,
+                        OwnerUserId = userIdGina,
+                        AssignedToUserId = userIdSatya,
                         TicketPriority = priorityHigh,
                         TicketRead = false
                      }
 
             };
+
+
 
             if (!context.Tickets.Any(r => r.ProjectId == projectOrion))
             {
@@ -648,6 +696,33 @@ namespace BugTracker.Migrations
                 context.SaveChanges();
             }
 
+            int ticketId = context.Tickets.FirstOrDefault(u => u.Title == "Project Mars").Id;
+            var ticketsHistory = new List<TicketHistory>
+            {
+                new TicketHistory
+                {
+                    TicketId = ticketId,
+                    ProjectName = "Orion",
+                    OldProjectName = "Apollo 13",
+                    TicketTypeName = "In Progress",
+                    OldTicketTypeName = "Bug"
+                },
+
+                new TicketHistory
+                {
+                    TicketId = ticketId,
+                    TicketPriorityName = "High",
+                    OldTicketPriorityName = "Low",
+                    TicketTypeName = "In Progress",
+                    OldTicketTypeName = "Bug"
+                }
+            };
+
+            if (!context.Tickets.Any(u => u.Title == "Project Mars"))
+            {
+                ticketsHistory.ForEach(h => context.TicketHistories.Add(h));
+                context.SaveChanges();
+            }
         }
 
     }
