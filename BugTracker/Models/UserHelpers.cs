@@ -170,15 +170,12 @@ namespace BugTracker.Models
         {
             var userList = new List<ApplicationUser>();
 
-            var userList1 = db.Users.Select(u => u.Projects.Select((p => p.Id != projectId))).ToList();
-            //foreach (var user in db.Users)
-            //{
-            //    if (!this.IsOnProject(user.Id, projectId) && rolesHelper.IsUserInRole(user.Id, roleName))
-            //    {
-            //        userList.Add(user);
-            //    }
-            //}
-            return userList;
+            var query =
+                    from u in db.Users
+                    where u.Projects.FirstOrDefault().Id != projectId
+                    select u;
+
+            return query.ToList();
         }
 
 

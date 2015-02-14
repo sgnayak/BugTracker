@@ -20,23 +20,43 @@
         //public IEnumerable<ApplicationUser> Users { get; set; }
     }
 
-    public partial class ProjectToUser
-    {
-        //       public ApplicationUser myCurrentUser {get; set;}
-        public string UserName;
-        public string UserId;
-        //        public IList<IdentityUserRole>    myCurrentProject { get; set; }
-        //       public IList<string> AvailableProject { get; set; }
+    //public partial class ProjectToUser
+    //{
+    //    //       public ApplicationUser myCurrentUser {get; set;}
+    //    public string UserName;
+    //    public string UserId;
+    //    //        public IList<IdentityUserRole>    myCurrentProject { get; set; }
+    //    //       public IList<string> AvailableProject { get; set; }
 
-        public MultiSelectList availableProjects { get; set; }
-        public string[] selectedProjects { get; set; }
+    //    public MultiSelectList availableProjects { get; set; }
+    //    public string[] selectedProjects { get; set; }
 
-        // User is already in these projects
-        public MultiSelectList assignedProjects { get; set; }
-        public string[] selectedAssignedProjects { get; set; }
+    //    // User is already in these projects
+    //    public MultiSelectList assignedProjects { get; set; }
+    //    public string[] selectedAssignedProjects { get; set; }
 
-        // User is not in these projects
-        public MultiSelectList notAssignedProjects { get; set; }
-        public string[] selectedNotAssignedProjects { get; set; }  
-    }
+    //    // User is not in these projects
+    //    public MultiSelectList notAssignedProjects { get; set; }
+    //    public string[] selectedNotAssignedProjects { get; set; }  
+    //}
+
+    //public partial class UserToProject
+    //{
+    //    //       public ApplicationUser myCurrentUser {get; set;}
+    //    public string ProjectName;
+    //    public string ProjectId;
+    //    //        public IList<IdentityUserRole>    myCurrentProject { get; set; }
+    //    //       public IList<string> AvailableProject { get; set; }
+
+    //    public MultiSelectList availableProjects { get; set; }
+    //    public string[] selectedProjects { get; set; }
+
+    //    // Users already in these projects
+    //    public MultiSelectList usersOnProject { get; set; }
+    //    public string[] selectedUsersOnProject { get; set; }
+
+    //    // User is not in these projects
+    //    public MultiSelectList usersNotOnProjects { get; set; }
+    //    public string[] selectedUsersNotOnProjects { get; set; }
+    //}
 }

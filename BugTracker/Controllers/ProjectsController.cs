@@ -236,8 +236,63 @@ namespace BugTracker.Controllers
         }
 
 
+        [Authorize(Roles = "Admin, Project Manager")]
+        [HttpGet]
+        public ActionResult AssignUsersToProject(int pid)
+        {
+
+            var userList = new List<ApplicationUser>();
+            var helperProject = new UserProjectHelper();
+
+            var ListOfProjects = db.Projects.OrderBy(p => p.Name).ToList().Select(pp => pp.Name.ToString()).ToList();
+
+            UserToProject userToProject = new UserToProject();
+
+            userToProject.ProjectId = pid;
+            userToProject.availableProjects = new MultiSelectList(ListOfProjects);
+
+            userToProject.usersOnProject = new MultiSelectList(helperProject.UsersOnProject(pid).OrderBy(u => u.DisplayName), "Id", "FirstName", null);
+
+            var usersNotOnProject = helperProject.UsersNotOnProject(pid).OrderBy(u => u.DisplayName);
+            userToProject.usersNotOnProjects = new MultiSelectList(usersNotOnProject, "Id", "FirstName", null);
 
 
+            return View("AssignUsersToProject", userToProject);
+        }
+
+        [Authorize(Roles = "Admin, Project Manager")]
+        [HttpPost]
+        public ActionResult AssignUsersToProject(int pid, [Bind(Include = "usersNotOnProjects,selectedUsersNotOnProjects")] UserToProject model,
+            string addButton)
+        {
+            var userList = new List<ApplicationUser>();
+            var helperProject = new UserProjectHelper();
+            var ListOfProjects = db.Projects.OrderBy(p => p.Name).ToList().Select(pp => pp.Name.ToString()).ToList();
+
+
+            foreach (var p in model.selectedUsersNotOnProjects)
+            {
+                string userId = db.Users.FirstOrDefault(n => n.Id == p).Id;
+                helperProject.AddUserToProject(userId, pid);
+            }
+            return RedirectToAction("ListProjectsAndUsers");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveUsersFromProject(int pid, [Bind(Include = "usersOnProject,selectedUsersOnProject")] UserToProject model,
+           string removeButton)
+        {
+            var helperProject = new UserProjectHelper();
+
+            foreach (var p in model.selectedUsersOnProject)
+            {
+                string userId = db.Users.FirstOrDefault(n => n.Id == p).Id;
+                helperProject.RemoveUserFromProject(userId, pid);
+            }
+
+            return RedirectToAction("ListProjectsAndUsers");
+
+        }
 
 
 

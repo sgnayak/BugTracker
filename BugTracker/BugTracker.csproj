@@ -184,6 +184,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UserToProject.cs" />
+    <Compile Include="Models\ProjectUser.cs" />
     <Compile Include="Models\ProjectViewModels.cs" />
     <Compile Include="Models\TicketsViewModels.cs" />
     <Compile Include="Models\RolesViewModels.cs" />
@@ -4331,6 +4333,7 @@
     <Content Include="Views\Tickets\Index - Copy.cshtml" />
     <Content Include="Views\Shared\_TicketsIndex.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\Projects\AssignUsersToProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
