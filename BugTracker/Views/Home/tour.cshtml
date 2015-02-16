@@ -94,34 +94,34 @@
             <p class="lead" data-step="4" data-intro="Another step.">Take a little demonstration of Bug Tracker through different Roles.</p>
             <div class="row">
                 <div class="col-sm-3 col-sm-push-1">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("LoginAdmin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {   @Html.AntiForgeryToken()
-                        <input type="hidden" name="Email" value="satyanayak@me.com" />
-                        <input type="hidden" name="Password" value="Password-1" />
+                        @*<input type="hidden" name="Email" value="satyanayak@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />*@
                         <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Admin" />
                     }
                 </div>
                 <div class="col-sm-3">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("LoginProjectManager", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {   @Html.AntiForgeryToken()
-                        <input type="hidden" name="Email" value="satyanayak@me.com" />
-                        <input type="hidden" name="Password" value="Password-1" />
+                        @*<input type="hidden" name="Email" value="GeneKranz@apollo13.com" />
+                        <input type="hidden" name="Password" value="Password-1" />*@
                         <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Project Manager" />
                     }
                 </div>
                 <div class="col-sm-3">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("LoginDeveloper", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {   @Html.AntiForgeryToken()
-                        <input type="hidden" name="Email" value="satyanayak@me.com" />
-                        <input type="hidden" name="Password" value="Password-1" />
+                        @*<input type="hidden" name="Email" value="avatar@me.com" />
+                        <input type="hidden" name="Password" value="Password-1" />*@
                         <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Developer" />
                     }
                 </div>
                 <div class="col-sm-3 col-sm-pull-1">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("LoginSubmitter", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {   @Html.AntiForgeryToken()
-                        <input type="hidden" name="Email" value="satyanayak@me.com" />
-                        <input type="hidden" name="Password" value="Password-1" />
+                    @*<input type="hidden" name="Email" value="WayneKnight@seinfeld.com" />
+                        <input type="hidden" name="Password" value="Password-1" />*@
                         <input class="btn btn-danger btn-lg btn-dash" style="min-width:150px;" type="submit" value="Submitter" />
                     }
                 </div>

@@ -81,7 +81,7 @@ namespace BugTracker.Models
                         var currentUserComments = _db.TicketComments.Where(u => u.Ticket.AssignedToUserId == currentUserId);
                         if (currentUserComments != null)
                         {
-                            count = currentUserComments.OrderByDescending(t => t.Created > lastLogin).Count();
+                            count = currentUserComments.Where(t => t.Created > lastLogin).Count();
                         }
                     }
                 }

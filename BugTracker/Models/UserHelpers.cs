@@ -35,15 +35,21 @@ namespace BugTracker.Models
 
         public IList<string> ListUserRoles(string userId)
         {
+
+            // It will throw null exception after u re-seed, browser cookie is looking for old user with old id 
             string[] returnSub = {"Submitter"};
-            if (userId == null)
+            var roles = manager.GetRoles(userId);
+            if (String.IsNullOrWhiteSpace(userId))
+            {
+                return (returnSub);
+            }
+            else if ( roles == null)
             {
                 return (returnSub);
             }
             else
             {
- //               return (returnSub);
-                return (manager.GetRoles(userId));
+                return (roles);
             }
         }
 

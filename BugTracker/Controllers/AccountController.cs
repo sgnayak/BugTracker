@@ -104,6 +104,157 @@ namespace BugTracker.Controllers
             }
         }
 
+
+        // POST: /Admin Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginAdmin(LoginViewModel model, string returnUrl)
+        {
+
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            model.Email = "satyanayak@me.com";
+            model.Password = "Password-1";
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    {
+                        var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                        ApplicationUser User = new ApplicationUser();
+                        User = db.Users.FirstOrDefault(u => u.Id == currentUser.Id);
+                        User.TimeLastLogOn = DateTimeOffset.Now;
+                        db.Entry(User).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToLocal("Home/Index");
+                    }
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View("Login");
+            }
+        }
+
+
+
+        // POST: /Project Manager Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginProjectManager(LoginViewModel model, string returnUrl)
+        {
+
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            model.Email = "GeneKranz@apollo13.com";
+            model.Password = "Password-1";
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    {
+                        var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                        ApplicationUser User = new ApplicationUser();
+                        User = db.Users.FirstOrDefault(u => u.Id == currentUser.Id);
+                        User.TimeLastLogOn = DateTimeOffset.Now;
+                        db.Entry(User).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToLocal("Home/Index");
+                    }
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View("Login");
+            }
+        }
+
+
+        // POST: /Developer Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginDeveloper(LoginViewModel model, string returnUrl)
+        {
+
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            model.Email = "avatar@me.com";
+            model.Password = "Password-1";
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    {
+                        var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                        ApplicationUser User = new ApplicationUser();
+                        User = db.Users.FirstOrDefault(u => u.Id == currentUser.Id);
+                        User.TimeLastLogOn = DateTimeOffset.Now;
+                        db.Entry(User).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToLocal("Home/Index");
+                    }
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View("Login");
+            }
+        }
+
+
+        // POST: /Submitter Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginSubmitter(LoginViewModel model, string returnUrl)
+        {
+
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            model.Email = "WayneKnight@seinfeld.com";
+            model.Password = "Password-1";
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    {
+                        var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                        ApplicationUser User = new ApplicationUser();
+                        User = db.Users.FirstOrDefault(u => u.Id == currentUser.Id);
+                        User.TimeLastLogOn = DateTimeOffset.Now;
+                        db.Entry(User).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToLocal("Home/Index");
+                    }
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View("Login");
+            }
+        }
+
+
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -178,10 +329,15 @@ namespace BugTracker.Controllers
 
                     var userId = UserDb.Users.Single(u => u.UserName == model.Email).Id;
 
+                    db.Users.FirstOrDefault(u => u.Id == userId).DisplayName = model.FirstName + " " + model.LastName;
+
                  //   IList<IdentityRole> userRoles = UserDb.Roles.ToList();
 
                     var helper = new UserRolesHelper();
                     helper.AddUserRole(userId, "Submitter"); //Lowest Priority by Default
+
+                 //   db.Entry(User).State = EntityState.Modified;
+                    db.SaveChanges();
 
                  //   BugTrackerEntities BugTrackerUser = new BugTrackerEntities();
                     //var BugTrackerUserInstance = new BTUser
@@ -435,7 +591,9 @@ namespace BugTracker.Controllers
             //db.SaveChanges();
 
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Tour", "Home");
+
         }
 
         //

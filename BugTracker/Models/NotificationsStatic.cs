@@ -14,7 +14,7 @@ namespace BugTracker.Models
 {
     public class NotificationsStatic
     {
-
+        // Can not be used inside static functions
         private ApplicationDbContext _db = new ApplicationDbContext();
 
         // Up Top Globe Total Notifications
@@ -26,7 +26,7 @@ namespace BugTracker.Models
             ApplicationUser user = _db.Users.FirstOrDefault(u => u.Id == currentUserId);
             if (user != null)
             {
-                    count = user.TicketNotifications.Count;
+                count = user.TicketNotifications.Count;
             }
             else
             {
@@ -35,63 +35,160 @@ namespace BugTracker.Models
             return (count);
         }
 
-        public int GetNewUserTicketCount(string currentUserId)
+        // This returns tickets that belong to new notifications that belongs to current user
+        public static IList<Ticket> GetNewUserTickets(string currentUserId)
         {
-            int count = 0;
             //string currentUserId = User.Identity.GetUserId();
-            Nullable<System.DateTimeOffset> lastLogin;
+            ApplicationDbContext _db = new ApplicationDbContext();
+            //Nullable<System.DateTimeOffset> lastLogin;
+
+            //var tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).ToList();
+            IList<Ticket> tickets = new List<Ticket>();
+
 
             if (!String.IsNullOrWhiteSpace(currentUserId))
             {
                 var user = _db.Users.Find(currentUserId);
-
                 if (user != null)
                 {
-                    lastLogin = user.TimeLastLogOn;
+                    tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).OrderByDescending(t => t.Created).Take(4).ToList();
 
-                    var tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId);
+                    //var query = from tn in _db.TicketNotifications
+                    //            where tn.UserId == currentUserId
+                    //            from t in _db.Tickets
+                    //            where t.Id == tn.TicketId
+                    //            select t;
 
-                    if (lastLogin != null)
-                    {
-                        if (tickets.Count() > 0)
-                            count = tickets.Where(t => t.Created > lastLogin).Count();
-                    }
+                    //tickets = query.ToList();
                 }
             }
             else
             {
-                count = 25;
+                tickets = null;
             }
-            return (count);
+            return (tickets.ToList());
         }
 
-        public int GetNewUserCommentsCount(string currentUserId)
+        // This returns tickets that belong to new notifications that belongs to current user
+        // This returns Tickets that were created since last Logon
+        public static IList<Ticket> GetNewUserTicketsSinceLastLogOn(string currentUserId)
         {
-            int count = 0;
             //string currentUserId = User.Identity.GetUserId();
-            Nullable<System.DateTimeOffset> lastLogin;
+            ApplicationDbContext _db = new ApplicationDbContext();
+            //Nullable<System.DateTimeOffset> lastLogin;
 
-            if (currentUserId != null)
+            IList<Ticket> tickets = new List<Ticket>();
+
+            var lastLogin = _db.Users.FirstOrDefault(u => u.Id == currentUserId).TimeLastLogOn;
+
+            if (!String.IsNullOrWhiteSpace(currentUserId))
             {
-                if ((_db.Users.FirstOrDefault(u => u.Id == currentUserId)) != null)
+                var user = _db.Users.Find(currentUserId);
+                if (user != null)
                 {
-                    lastLogin = _db.Users.FirstOrDefault(u => u.Id == currentUserId).TimeLastLogOn;
+                    tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).Where(t => t.Created > lastLogin).Take(4).ToList();
+
+                    //var query = from tn in _db.TicketNotifications
+                    //            where tn.UserId == currentUserId
+                    //            from t in _db.Tickets
+                    //            where t.Id == tn.TicketId
+                    //            select t;
+
+                    //tickets = query.ToList();
+                }
+            }
+            else
+            {
+                tickets = null;
+            }
+            return (tickets.ToList());
+        }
+
+
+
+
+
+        public static IList<Project> GetProjectsForUser(string currentUserId)
+        {
+            //string currentUserId = User.Identity.GetUserId();
+            ApplicationDbContext _db = new ApplicationDbContext();
+            //Nullable<System.DateTimeOffset> lastLogin;
+
+            //var tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).ToList();
+            IList<Project> projects = new List<Project>();
+
+
+            if (!String.IsNullOrWhiteSpace(currentUserId))
+            {
+                var user = _db.Users.Find(currentUserId);
+                if (user != null)
+                {
+
+                    var query = from u in _db.Users
+                                where u.Id == currentUserId
+                                from pr in u.Projects
+                                select pr
+                               ;
+
+                    projects = query.ToList();
+                    //     return (query.ToList());
+
+                }
+            }
+            else
+            {
+                projects = null;
+            }
+            return (projects);
+        }
+
+        public static IList<TicketComment> GetUserComments(string currentUserId)
+        {
+
+            ApplicationDbContext _db = new ApplicationDbContext();
+            //Nullable<System.DateTimeOffset> lastLogin;
+
+            //var tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).ToList();
+            IList<TicketComment> comments = new List<TicketComment>();
+            var lastLogin = _db.Users.FirstOrDefault(u => u.Id == currentUserId).TimeLastLogOn;
+
+
+            if (!String.IsNullOrWhiteSpace(currentUserId))
+            {
+                var user = _db.Users.Find(currentUserId);
+                if (user != null)
+                {
 
                     if (lastLogin != null)
                     {
                         var currentUserComments = _db.TicketComments.Where(u => u.Ticket.AssignedToUserId == currentUserId);
                         if (currentUserComments != null)
                         {
-                            count = currentUserComments.OrderByDescending(t => t.Created > lastLogin).Count();
+                            comments = currentUserComments.Where(t => t.Created > lastLogin).ToList();
                         }
                     }
+                    else
+                    {
+                        comments = null;
+                    }
+
+                    //var query = from u in _db.Users
+                    //            where u.Id == currentUserId
+                    //            from cm in u.TicketComments.OrderByDescending(c => c.Created > lastLogin).Take(4)
+                    //            select cm
+                    //           ;
+
+                    //comments = query.ToList();
+                    //     return (query.ToList());
+
                 }
             }
             else
             {
-                count = 25;
+                comments = null;
             }
-            return (count);
+            return (comments);
+
         }
 
         public int GetUserProjectsCount(string currentUserId)
@@ -101,10 +198,10 @@ namespace BugTracker.Models
             if (currentUserId != null)
             {
                 var userProjects = _db.Users.FirstOrDefault(u => u.Id == currentUserId);
-                    if(userProjects != null)
-                    {
-                        count = userProjects.Projects.Count();
-                    }
+                if (userProjects != null)
+                {
+                    count = userProjects.Projects.Count();
+                }
             }
             else
             {

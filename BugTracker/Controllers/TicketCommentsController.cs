@@ -61,6 +61,7 @@ namespace BugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticketComment.Created = System.DateTimeOffset.Now;
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Tickets", new { id = ticketComment.TicketId });

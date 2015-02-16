@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 namespace BugTracker.Controllers
 {
 
+    [Authorize(Roles = "Admin, Project Manager")]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -251,10 +252,10 @@ namespace BugTracker.Controllers
             userToProject.ProjectId = pid;
             userToProject.availableProjects = new MultiSelectList(ListOfProjects);
 
-            userToProject.usersOnProject = new MultiSelectList(helperProject.UsersOnProject(pid).OrderBy(u => u.DisplayName), "Id", "FirstName", null);
+            userToProject.usersOnProject = new MultiSelectList(helperProject.UsersOnProject(pid).OrderBy(u => u.DisplayName), "Id", "DisplayName", null);
 
             var usersNotOnProject = helperProject.UsersNotOnProject(pid).OrderBy(u => u.DisplayName);
-            userToProject.usersNotOnProjects = new MultiSelectList(usersNotOnProject, "Id", "FirstName", null);
+            userToProject.usersNotOnProjects = new MultiSelectList(usersNotOnProject, "Id", "DisplayName", null);
 
 
             return View("AssignUsersToProject", userToProject);

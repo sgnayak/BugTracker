@@ -10,6 +10,8 @@ using System.Collections;
 
 namespace BugTracker.Controllers
 {
+    
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         // GET: Rolles

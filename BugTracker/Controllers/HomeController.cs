@@ -18,6 +18,7 @@ namespace BugTracker.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             UserNotifications userNote = new UserNotifications();
@@ -34,19 +35,6 @@ namespace BugTracker.Controllers
             return View(tickets);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
     }
 }

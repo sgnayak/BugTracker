@@ -81,7 +81,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Satya",
                     LastName = "Nayak",
-                    DisplayName = "SN",
+                    DisplayName = "Satya Nayak",
                     UserName = "satyanayak@me.com",
                     Email = "satyanayak@me.com"
                 },
@@ -113,7 +113,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Jim",
                     LastName = "Lovell",
-                    DisplayName = "Commander",
+                    DisplayName = "Jim Lovell",
                     UserName = "JimLovell@apollo13.com",
                     Email =    "JimLovell@apollo13.com"
                 },
@@ -128,7 +128,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Jack",
                     LastName = "Swigert",
-                    DisplayName = "Pilot",
+                    DisplayName = "Jack Swigert",
                     UserName = "JackSwigert@apollo13.com",
                     Email =    "JackSwigert@apollo13.com"
                 },
@@ -143,7 +143,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Fred",
                     LastName = "Haise",
-                    DisplayName = "LunarPilot",
+                    DisplayName = "Fred Haise",
                     UserName = "FredHaise@apollo13.com",
                     Email =    "FredHaise@apollo13.com"
                 },
@@ -158,7 +158,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Gene",
                     LastName = "Krantz",
-                    DisplayName = "MissionControl",
+                    DisplayName = "Gene Krantz",
                     UserName = "GeneKranz@apollo13.com",
                     Email =    "GeneKranz@apollo13.com"
                 },
@@ -176,7 +176,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Jerry",
                     LastName = "Seinfeld",
-                    DisplayName = "Jeeerrry",
+                    DisplayName = "Jerry Seinfeld",
                     UserName = "JerrySeinfeld@seinfeld.com",
                     Email =    "JerrySeinfeld@seinfeld.com"
                 },
@@ -191,7 +191,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Michael",
                     LastName = "Richards",
-                    DisplayName = "Kramer",
+                    DisplayName = "Michael Richards",
                     UserName = "MichaelRichards@seinfeld.com",
                     Email =    "MichaelRichards@seinfeld.com"
                 },
@@ -206,7 +206,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Jason",
                     LastName = "Alexander",
-                    DisplayName = "George",
+                    DisplayName = "Jason Alexander",
                     UserName = "JasonAlexander@seinfeld.com",
                     Email =    "JasonAlexander@seinfeld.com"
                 },
@@ -221,7 +221,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Julia",
                     LastName = "Dreyfus",
-                    DisplayName = "Elane",
+                    DisplayName = "Julia Dreyfus",
                     UserName = "JuliaDreyfus@seinfeld.com",
                     Email =    "JuliaDreyfus@seinfeld.com"
                 },
@@ -237,7 +237,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Lary",
                     LastName = "David",
-                    DisplayName = "Director",
+                    DisplayName = "Lary David",
                     UserName = "LaryDavid@seinfeld.com",
                     Email = "LaryDavid@seinfeld.com"
                 },
@@ -271,7 +271,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Ben",
                     LastName = "Rich",
-                    DisplayName = "Ben",
+                    DisplayName = "Ben Rich",
                     UserName = "BenRich@lockheed.com",
                     Email = "BenRich@lockheed.com"
                 },
@@ -287,7 +287,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Kelly",
                     LastName = "Johnson",
-                    DisplayName = "Kelly",
+                    DisplayName = "Kelly Johnson",
                     UserName = "KellyJohnson@lockheed.com",
                     Email = "KellyJohnson@lockheed.com"
                 },
@@ -302,7 +302,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Joseph",
                     LastName = "Ware",
-                    DisplayName = "Pilot-U2",
+                    DisplayName = "Joseph Ware",
                     UserName = "JosephWare@lockheed.com",
                     Email = "JosephWare@lockheed.com"
                 },
@@ -317,7 +317,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "James",
                     LastName = "Sullivan",
-                    DisplayName = "Pilot-SR71",
+                    DisplayName = "James Sullivan",
                     UserName = "JamesSullivan@lockheed.com",
                     Email = "JamesSullivan@lockheed.com"
                 },
@@ -334,7 +334,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Cleon",
                     LastName = "Lacefiled",
-                    DisplayName = "Manager",
+                    DisplayName = "Cleon Lacefiled",
                     UserName = "CleonLacefield@nasa.gov",
                     Email = "CleonLacefield@nasa.gov"
                 },
@@ -349,7 +349,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Larry",
                     LastName = "Price",
-                    DisplayName = "DeputyPM",
+                    DisplayName = "Larry Price",
                     UserName = "LarryPrice@nasa.gov",
                     Email = "LarryPrice@nasa.gov"
                 },
@@ -364,7 +364,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Bill",
                     LastName = "Johns",
-                    DisplayName = "TechLead",
+                    DisplayName = "Bill Johns",
                     UserName = "BillJohns@nasa.gov",
                     Email = "BillJohns@nasa.gov"
                 },
@@ -379,7 +379,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Gina",
                     LastName = "Curet",
-                    DisplayName = "Business",
+                    DisplayName = "Gina Curet",
                     UserName = "GinaCuret@nasa.gov",
                     Email = "GinaCuret@nasa.gov"
                 },
@@ -396,7 +396,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Elon",
                     LastName = "Musk",
-                    DisplayName = "CEO",
+                    DisplayName = "Elon Musk",
                     UserName = "ElonMusk@teslamotors.com",
                     Email = "ElonMusk@teslamotors.com"
                 },
@@ -411,7 +411,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Brad",
                     LastName = "Buss",
-                    DisplayName = "CFO",
+                    DisplayName = "Brad Buss",
                     UserName = "BradBuss@teslamotors.com",
                     Email = "BradBuss@teslamotors.com"
                 },
@@ -426,7 +426,7 @@ namespace BugTracker.Migrations
                 {
                     FirstName = "Ira",
                     LastName = "Ehrenpreis",
-                    DisplayName = "Partner",
+                    DisplayName = "Ira Ehrenpreis",
                     UserName = "IraEhrenpreis@teslamotors.com",
                     Email = "IraEhrenpreis@teslamotors.com"
                 },

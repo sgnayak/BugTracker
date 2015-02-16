@@ -21,7 +21,8 @@
             </div>
             <div class="content overflow-hidden">
                 <div class="well">
-                    @Model.Description
+                    @Html.Raw(HttpUtility.HtmlDecode(@Model.Description))
+                    @*@Model.Description*@
                 </div>
 
                 <div class="tab-container">
@@ -39,7 +40,7 @@
                                 foreach (var c in @Model.TicketComments)
                                 {
                                     <h5 style="padding:1px; color:#816bb1"><strong> By : @c.User.DisplayName  </strong>   <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
-                                    <h5>@c.Comment</h5>
+                                    <h5>@Html.Raw(HttpUtility.HtmlDecode(@c.Comment))</h5>
                                     <hr />
                                 }
                             }

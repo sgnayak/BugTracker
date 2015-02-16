@@ -120,26 +120,27 @@
                                     <li class="active"><a href="@Url.Action("Create", "Tickets")">Create</a></li>
                                 </ul>
                             </li>
-                            @if(User.IsInRole("Admin") | User.IsInRole("Project Manager"))
+                            @if (User.IsInRole("Admin") | User.IsInRole("Project Manager"))
                             {
-                            <li>
-                                <a href="@Url.Action("Index", "Tickets")"><i class="fa fa-cogs"></i><span>Projects</span></a>
-                                <ul class="sub-menu">
-                                    <li class="active"><a href="@Url.Action("Index", "Projects")">All Projects</a></li>
-                                    <li class="active"><a href="@Url.Action("AssignProjectsToUser", "Projects")">Assign Project To Users</a></li>
-                                    <li class="active"><a href="@Url.Action("ListProjectsAndUsers", "Projects")">Projects and Users Table</a></li>
-                                    <li class="active"><a href="@Url.Action("Create", "Projects")">Create Project</a></li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Tickets")"><i class="fa fa-cogs"></i><span>Projects</span></a>
+                                    <ul class="sub-menu">
+                                        <li class="active"><a href="@Url.Action("Index", "Projects")">All Projects</a></li>
+                                        <li class="active"><a href="@Url.Action("Create", "Projects")">Create Project</a></li>
+                                        @*<li class="active"><a href="@Url.Action("AssignProjectsToUser", "Projects")">Assign Project To Users</a></li>
+                                            <li class="active"><a href="@Url.Action("AssignUsersToProject", "Projects")">Assign Users To Project</a></li>*@
+                                        <li class="active"><a href="@Url.Action("ListProjectsAndUsers", "Projects")">Projects and Users Table</a></li>
+                                    </ul>
+                                </li>
                             }
                             @if (User.IsInRole("Admin"))
                             {
-                            <li>
-                                <a href="#"><i class="fa fa-user"></i><span>User Roles</span></a>
-                                <ul class="sub-menu">
-                                    <li class="active"><a href="@Url.Action("ListUsers", "Roles")">Modify Roles</a></li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i><span>User Roles</span></a>
+                                    <ul class="sub-menu">
+                                        <li class="active"><a href="@Url.Action("ListUsers", "Roles")">Modify User Roles</a></li>
+                                    </ul>
+                                </li>
                             }
                             <li>
                                 <a href="#"><i class="fa fa-comments-o"></i><span>User Notification</span></a>
@@ -156,8 +157,8 @@
                     <button id="sidebar-collapse" class="btn btn-default" style="" type="submit"><i style="color:#fff;" class="fa fa-angle-left"></i></button>
                     @using (Html.BeginForm("Search", "Tickets", FormMethod.Post, null))
                     {
-                    @*<input class="form-control col-lg-12" type="text" name="searchStr" />*@
-                        <input type="text" style="width:200px"class="form-control search" name="searchStr" placeholder="Search..." />
+                        @*<input class="form-control col-lg-12" type="text" name="searchStr" />*@
+                        <input type="text" style="width:200px" class="form-control search" name="searchStr" placeholder="Search..." />
                         <button id="search" class="btn btn-default" style="" type="submit"><i style="color:#fff;" class="fa fa-search"></i></button>
                     }
                 </div>
@@ -176,7 +177,7 @@
                 <div class="container-fluid">
                     <div class="navbar-collapse">
                         <ul class="nav navbar-nav navbar-right user-nav">
-                    @* *************  Right Side Icon *************** *@
+                            @* *************  Right Side Icon *************** *@
                             @if (Request.IsAuthenticated)
                             {
                                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -185,7 +186,7 @@
 
                                     <li class="dropdown profile_menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@User.Identity.GetUserName()</span> <b class="caret"></b></a>
-                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@Html.Partial("_LoginPartial")</span> <b class="caret"></b></a>*@
+                                        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@Html.Partial("_LoginPartial")</span> <b class="caret"></b></a>*@
                                         <ul class="dropdown-menu">
                                             <li><a href="@Url.Action("Index", "Manage")">My Account</a></li>
                                             <li class="divider"></li>
@@ -198,7 +199,7 @@
                             {
                                 <li class="dropdown profile_menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@User.Identity.GetUserName()</span> <b class="caret"></b></a>
-                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@Html.Partial("_LoginPartial")</span> <b class="caret"></b></a>*@
+                                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img alt="Avatar" src="~/images/user-icon.png" /><span>@Html.Partial("_LoginPartial")</span> <b class="caret"></b></a>*@
                                     <ul class="dropdown-menu">
                                         <li><a href="@Url.Action("Login", "Account")">Sign In</a></li>
                                         <li class="divider"></li>
@@ -211,22 +212,36 @@
 
                             <li class="button dropdown">
 
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i><span class="bubble">@NotificationsStatic.GetUserNotificationsStatic(@User.Identity.GetUserId())</span></a>
-                    @*<ul class="dropdown-menu">
-                            <li>
-                                <div class="nano nscroller">
-                                    <div class="content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-cloud-upload info"></i><b>Daniel</b> is now following you <span class="date">2 minutes ago.</span></a></li>
-                                            <li><a href="#"><i class="fa fa-male success"></i> <b>Michael</b> commented on your link <span class="date">15 minutes ago.</span></a></li>
-                                            <li><a href="#"><i class="fa fa-bug warning"></i> <b>Mia</b> commented on post <span class="date">30 minutes ago.</span></a></li>
-                                            <li><a href="#"><i class="fa fa-credit-card danger"></i> <b>Andrew</b> sent you a request <span class="date">1 hour ago.</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <ul class="foot"><li><a href="#">View all activity </a></li></ul>
-                            </li>
-                        </ul>*@
+                                <a href="@Url.Action("Index", "TicketNotifications")" dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i><span class="bubble">@NotificationsStatic.GetUserNotificationsStatic(@User.Identity.GetUserId())</span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="nano nscroller">
+                                            <div class="content">
+                                                <ul>
+                                                    @{var tickets = NotificationsStatic.GetNewUserTickets(@User.Identity.GetUserId());
+                                                    @*<li><a href="@Url.Action("Index", "TicketNotifications")"><i class="fa fa-bug warning"></i><b>Notifications : </b>All Notifications</a></li>*@
+                                                        if (tickets != null)
+                                                        {
+                                                            if (tickets.Count() > 0)
+                                                            {
+                                                                <li><a href="@Url.Action("Details", "Tickets", new { id = @tickets[0].Id})"><i class="fa fa-bug danger"></i> <b>Ticket1</b> @tickets[0].Title <span class="date">@tickets[0].Created.ToString("MM/dd/yy")</span></a></li>
+                                                            }
+                                                            if (tickets.Count() > 1)
+                                                            {
+                                                                <li><a href="@Url.Action("Details", "Tickets", new { id = @tickets[1].Id})"><i class="fa fa-bug danger"></i> <b>Ticket2</b> @tickets[1].Title <span class="date">@tickets[1].Created.ToString("MM/dd/yy")</span></a></li>
+                                                            }
+                                                            if (tickets.Count() > 2)
+                                                            {
+                                                                <li><a href="@Url.Action("Details", "Tickets", new { id = @tickets[2].Id})"><i class="fa fa-bug danger"></i> <b>Ticket3</b> @tickets[2].Title <span class="date">@tickets[2].Created.ToString("MM/dd/yy")</span></a></li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <ul class="foot"><li><a href="@Url.Action("Index", "TicketNotifications")"><strong class="info"> View all Notifications </strong></a></li></ul>
+                                    </li>
+                                </ul>
                             </li>
 
                         </ul>
@@ -249,11 +264,11 @@
         </div>  <!--Container Fluid -->
 
     </div>  <!--Cl Wraper -->
-                    @*  FOllowing JQuery files interfere with Data Table JS files ?????? *@
-                    @*<script type="text/javascript" src="~/js/jquery.flot/jquery.flot.js"></script>
-                        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.pie.js"></script>
-                        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.resize.js"></script>
-                        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.labels.js"></script>*@
+    @*  FOllowing JQuery files interfere with Data Table JS files ?????? *@
+    @*<script type="text/javascript" src="~/js/jquery.flot/jquery.flot.js"></script>
+        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.pie.js"></script>
+        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.resize.js"></script>
+        <script type="text/javascript" src="~/js/jquery.flot/jquery.flot.labels.js"></script>*@
 
 
 

@@ -1,6 +1,7 @@
 ﻿    <!-- Extra Bar -->
 @model IEnumerable<BugTracker.Models.Ticket>
-
+@using Microsoft.AspNet.Identity
+@using BugTracker.Models
 
 @*<div class="modal fade" id="ticketsInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class=" modal-dialog">
@@ -32,7 +33,21 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <h4>New Tickets that are assigned to you</h4>
+                    @{
+                        var tickets = NotificationsStatic.GetNewUserTicketsSinceLastLogOn(@User.Identity.GetUserId());
+                    }
+                    @if (tickets != null)
+                    {
+                        for (var iit = 0; iit < tickets.Count(); iit++)
+                        {
+                            <a href="@Url.Action("Details", "Tickets", new { id = @tickets[iit].Id})"><i class="fa fa-cog danger"></i> <b>Ticket : </b> @tickets[iit].Title </a> <br>
+                        }
+
+                    }
+                    else
+                    {
+                        <h4> No New Tickets Created Since Last Log In</h4>
+                    }
                 </div>
             </div>
             <div class="modal-footer">
@@ -47,12 +62,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h3>Total New Comments Counts</h3>
+                <h3> 4 Most Recent Comments</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <h4>New Comments that are added to your Tickets</h4>
+                    @{
+                        var comments = NotificationsStatic.GetUserComments(@User.Identity.GetUserId());
+                    }
+                    @if (comments != null)
+                        {
+                            for (var iic = 0; iic < comments.Count(); iic++)
+                            {
+                                <a href="@Url.Action("Details", "Tickets", new { id = @comments[iic].Ticket.Id})"><i class="fa fa-cog danger"></i> <b>Project : </b> @comments[iic].Ticket.Title </a> <br>
+                            }
+
+                        }
+                        else
+                        {
+                            <h4> No Project Assigned</h4>
+                        }
                 </div>
             </div>
             <div class="modal-footer">
@@ -67,12 +96,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h3>Total Projects</h3>
+                <h3>Current Projects Assigned To You</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <h4>Number of Projects you are currently working on</h4>
+                    @{
+                        var projects = NotificationsStatic.GetProjectsForUser(@User.Identity.GetUserId());
+                    }
+                    @if (projects != null)
+                    {
+                        for (var ii = 0; ii < projects.Count(); ii++)
+                        {
+                            <a href="@Url.Action("Details", "Projects", new { id = @projects[ii].Id})"><i class="fa fa-cog danger"></i> <b>Project : </b> @projects[ii].Name </a> <br>
+                        }
+
+                    }
+                    else
+                    {
+                        <h4> No Project Assigned</h4>
+                    }
                 </div>
             </div>
             <div class="modal-footer">
@@ -92,7 +135,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <h4>Displays highest role you are assigned to Admin > Project Manager > Developer > Submitter</h4>
+                <h5>Admin Role can see all capabilities, <br> Project Manager can create projects and modify project User assignments <br> Developer can be assigned Tickets <br>  Submitter can only Create ticket</h5>
                 </div>
             </div>
             <div class="modal-footer">
