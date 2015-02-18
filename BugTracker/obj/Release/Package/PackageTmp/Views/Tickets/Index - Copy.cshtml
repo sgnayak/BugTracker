@@ -1,0 +1,127 @@
+﻿@model IEnumerable<BugTracker.Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<div class="container-fluid" id="pcont">*@
+
+
+        <h2>Tickets Index</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-responsive" id="table_id">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Project
+                    </th>
+                    <th>
+                        Priority
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Created
+                    </th>
+                    <th>
+                        Updated
+                    </th>
+                    <th>
+                        Assigned-To
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project.Name)
+                        </td>
+                        @{
+                    var color = "#fff";
+                    if (item.TicketPriority.ToString() == "High")
+                    {
+                        color = "red";
+                    }
+                    else if (item.TicketPriority.ToString() == "Low")
+                    {
+                        color = "green";
+                    }
+                        }
+                        <td style="background-color: @color">
+                            @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TicketType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @item.Created.ToString("MM/dd/yy")
+
+                            @*@Html.DisplayFor(modelItem => item.Created)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Updated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })*@
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                            @*@Html.ActionLink("Attach", "Create", "TicketAttachments", new { id = item.Id }, null)*@
+
+                            <div class="pull-right action-buttons">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id, @class = "glyphicon glyphicon-pencil" }) <span class="glyphicon glyphicon-pencil"></span>
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                @Html.ActionLink("Comments", "Create", "TicketComments", new { id = item.Id }, null)
+
+
+
+
+
+
+
+
+                                @*<a href="href="@Url.Action("Edit", "Tickets", new { id="item.Id" })" @class ="flag"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="href=" @Url.Action("Delete", "Tickets", new { id = "item.Id"}) "" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a href="href=" @Url.Action("Details", "Tickets", new { id="item.Id" }) "" class="flag"><span class="glyphicon glyphicon-align-justify"></span></a>*@
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+

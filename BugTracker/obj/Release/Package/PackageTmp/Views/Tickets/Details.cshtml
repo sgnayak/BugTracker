@@ -1,0 +1,251 @@
+﻿@model BugTracker.Models.Ticket
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Details";
+}
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Ticket Title : @Model.Title </h3>
+                <div class="alert-block" style="padding:3px">
+                    <h5 style="padding:1px; color:#816bb1"><strong> By @Model.OwnerUser.DisplayName</strong><span class="pull-right">Posted On @Model.Created.ToString("MMMM dd yyyy")</span></h5>
+                </div>
+            </div>
+            <div class="content overflow-hidden">
+                <div class="well">
+                    @Html.Raw(HttpUtility.HtmlDecode(@Model.Description))
+                    @*@Model.Description*@
+                </div>
+
+                <div class="tab-container">
+                    <ul class="nav nav-tabs fa-border">
+                        <li class="active alert-warning"><a href="#Comments" data-toggle="tab"><strong>Comments</strong></a></li>
+                        <li class="alert-success"><a href="#Attachments" data-toggle="tab"><strong>Attachments</strong></a></li>
+                        <li class="alert-info"><a href="#History" data-toggle="tab"><strong>History</strong></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active cont" id="Comments">
+                            @if (@Model.TicketComments.Count > 0)
+                            {
+                                <h4>Comments for this ticket</h4>
+                                <hr>
+                                foreach (var c in @Model.TicketComments)
+                                {
+                                    <h5 style="padding:1px; color:#816bb1"><strong> By : @c.User.DisplayName  </strong>   <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
+                                    <h5>@Html.Raw(HttpUtility.HtmlDecode(@c.Comment))</h5>
+                                    <hr />
+                                }
+                            }
+                            else
+                            {
+                                <h4>No comments posted </h4>
+                            }
+                        </div>
+                        <div class="tab-pane cont" id="Attachments">
+                            @if (@Model.TicketAttachments.Count > 0)
+                            {
+                                <h4>Attachments for this ticket</h4>
+                                <hr>
+                                foreach (var c in @Model.TicketAttachments)
+                                {
+                                    <h5 class="alert-primary" style="padding:1px">Posted By : @c.User.DisplayName     <span class="pull-right">@c.Created.ToString("MMMM dd yyyy")</span></h5>
+                                    <h5>@c.Decsription</h5>
+                                    if (c.FilePath != null)
+                                    {
+                                        <h5 class="text-danger"><a href=@Url.Content(c.FilePath)>Click To Open File</a></h5>
+                                        @*<img class="img-responsive" src=@Url.Content(item.FilePath) alt="">*@
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <h4>No Attachments</h4>
+                            }
+                        </div>
+                        <div class="tab-pane cont" id="History">
+
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Project
+                                        </th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
+                                            Priority
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Assigned To Changed
+                                        </th>
+                                        <th>
+                                            Modified by User
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.TicketHistories)
+                                    {
+                                        <tr>
+                                            @{
+                                                string color1 = null;
+                                                if (item.OldProjectId == null)
+                                                {
+                                                    color1 = null;
+                                                }
+                                                else if (item.ProjectId != item.OldProjectId)
+                                                {
+                                                    color1 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color1">
+                                                @Html.DisplayFor(modelItem => item.ProjectName)
+                                                @Html.DisplayFor(modelItem => item.OldProjectName)
+                                            </td>
+                                            @{
+                                                string color2 = null;
+                                                if (item.OldTicketTypeId == null)
+                                                {
+                                                    color2 = null;
+                                                }
+                                                else if (item.TicketTypeId != item.OldTicketTypeId)
+                                                {
+                                                    color2 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color2">
+                                                @Html.DisplayFor(modelItem => item.TicketTypeName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketTypeName)
+                                            </td>
+                                            @{
+                                                string color3 = null;
+                                                if (item.OldTicketPriorityId == null)
+                                                {
+                                                    color3 = null;
+                                                }
+                                                else if (item.TicketPriorityId != item.OldTicketPriorityId)
+                                                {
+                                                    color3 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color3">
+                                                @Html.DisplayFor(modelItem => item.TicketPriorityName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketPriorityName)
+                                            </td>
+                                            @{                                    
+                                                string color4 = null;
+                                                if (item.OldTicketStatusId == null)
+                                                {
+                                                    color4 = null;
+                                                }
+                                                else 
+                                                if (item.TicketStatusId != item.OldTicketStatusId)
+                                                {
+                                                    color4 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color4">
+                                                @Html.DisplayFor(modelItem => item.TicketStatusName)
+                                                @Html.DisplayFor(modelItem => item.OldTicketStatusName)
+                                            </td>
+                                            @{
+                                                string color5 = null;
+                                                if (item.OldAssignedToUserId == null)
+                                                {
+                                                    color5 = null;
+                                                }
+                                                else if (item.AssignedToUserId != item.OldAssignedToUserId)
+                                                {
+                                                    color5 = "alert alert-info";
+                                                }
+                                            }
+                                            <td class="@color5">
+                                                @Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)
+                                                @Html.DisplayFor(modelItem => item.OldAssignedToUser.DisplayName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.DisplayName)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="block-flat">
+            <div class="header">
+                <div class="pull-right actions">
+                </div>
+                <h3>Ticket Tags</h3>
+            </div>
+            <div class="content">
+
+                <div class="alert alert-primary alert-white rounded">
+                    <div class="icon"><i class="fa fa-info-circle"></i></div>
+                    <strong>Type : @Model.TicketType.Name</strong>
+                </div>
+                @if (@Model.TicketPriority.Name == "High")
+                {
+                    <div class="alert alert-warning alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
+                else if (@Model.TicketPriority.Name == "Medium")
+                {
+                    <div class="alert alert-info alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-success alert-white rounded">
+                        <div class="icon"><i class="fa fa-warning"></i></div>
+                        <strong>Priority : @Model.TicketPriority.Name</strong>
+                    </div>
+                }
+
+
+                <div class="alert alert-yellow alert-white rounded">
+                    <div class="icon"><i class="fa fa-info-circle"></i></div>
+                    <strong>Status : @Model.TicketStatus.Name</strong>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

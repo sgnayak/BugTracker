@@ -17,13 +17,13 @@ namespace BugTracker.Models
                     new ApplicationDbContext()));
 
         // Ronny Overby Code *********************
-        private ApplicationDbContext _db;
+        //private ApplicationDbContext _db;
 
-        public void DemoGettingUsersInSpecificRole(ApplicationDbContext dbContext)
-        {
-            if (dbContext == null) throw new ArgumentNullException("dbContext");
-            _db = dbContext;
-        }
+        //public void DemoGettingUsersInSpecificRole(ApplicationDbContext dbContext)
+        //{
+        //    if (dbContext == null) throw new ArgumentNullException("dbContext");
+        //    _db = dbContext;
+        //}
         // Ronny Overby Code *********************
 
 
@@ -56,6 +56,7 @@ namespace BugTracker.Models
         public bool AddUserRole(string userId, string roleName)
         {
             var result = manager.AddToRole(userId, roleName);
+           // _db.SaveChanges();
             return result.Succeeded;
         }
 
@@ -79,18 +80,18 @@ namespace BugTracker.Models
 
 
         // Ronny Overby Code *********************
-        public IList<ApplicationUser> GetUsersInRole(string roleName)
-        {
-            var query =
-                from r in _db.Roles
-                where r.Name == roleName
-                from ur in r.Users
-                join u in _db.Users on ur.UserId equals u.Id
-                select u;
+        //public IList<ApplicationUser> GetUsersInRole(string roleName)
+        //{
+        //    var query =
+        //        from r in _db.Roles
+        //        where r.Name == roleName
+        //        from ur in r.Users
+        //        join u in _db.Users on ur.UserId equals u.Id
+        //        select u;
 
-            var users = query.ToList();
-            return users;
-        }
+        //    var users = query.ToList();
+        //    return users;
+        //}
         // Ronny Overby Code *********************
 
 

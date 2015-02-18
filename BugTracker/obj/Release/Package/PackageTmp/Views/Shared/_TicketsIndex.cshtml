@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BugTracker.Models.Ticket>
+<div class="page-head"> @Html.ActionLink("Create New Ticket", "Create", "Tickets") </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Top Ten Tickets</h3>
+            </div>
+            <div class="content">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datatable-ticket-display-x">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Project</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Created</th>
+                                <th>Assigned-To</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.OwnerUser.FirstName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Project.Name)</td>
+                                    @{
+                                string color = "";
+                                if (item.TicketPriorityId == 2)
+                                {
+                                    color = "FFA07A";
+                                    color = "alert alert-info";
+                                }
+                                else if (item.TicketPriorityId == 1) //Low
+                                {
+                                    color = "20B2AA";
+                                    color = "alert alert-success";
+                                }
+                                else
+                                {
+                                    color = "FF6347";
+                                    color = "alert alert-danger";
+                                } // High
+                                    }
+                                    <td class="@color">@Html.DisplayFor(modelItem => item.TicketPriority.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TicketStatus.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TicketType.Name)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Title)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td>@item.Created.ToString("MM/dd/yy")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AssignedToUser.DisplayName)</td>
+                                    <td data-id="@item.Id">
+                                        <div class="btn-group">
+                                            <button class="btn btn-default btn-xs" type="button">Actions</button>
+                                            <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul role="menu" class="dropdown-menu">
+                                                <li><a href="@Url.Action("Edit", "Tickets", new { id = item.Id })">Edit</a></li>
+                                                <li><a href="@Url.Action("Details", "Tickets",  new { id = item.Id })">Detail</a></li>
+                                                <li><a href="@Url.Action("Create","TicketComments", new { id = item.Id })">Add Comment</a></li>
+                                            </ul>
+                                        </div>
+
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //Add dataTable Functions
+    $("#datatable-ticket-display tbody tr td:last-child").each(function () {
+        $(this).html('<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu"><li><a href="/Tickets/Edit/' + $(this).data('id') + '">Edit</a></li><li><a href="/Tickets/Details/' + $(this).data('id') + '">Detail</a></li><li><a href="/TicketComments/Create/' + $(this).data('id') + '">Add Comment</a></li></ul></div>');
+    });
+
+    $(document).ready(function () {
+        //initialize the javascript
+        //Basic Instance
+        $("#datatable-ticket-display").dataTable();
+
+        //Search input style
+        //$('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');
+        //$('.dataTables_length select').addClass('form-control');
+
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+            sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+            sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+            sOut += '</table>';
+
+            return sOut;
+        }
+    });
+</script>

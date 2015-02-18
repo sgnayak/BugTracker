@@ -51,15 +51,15 @@ namespace BugTracker.Models
                 var user = _db.Users.Find(currentUserId);
                 if (user != null)
                 {
-                    tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).OrderByDescending(t => t.Created).Take(4).ToList();
+                    //tickets = _db.Tickets.Where(t => t.AssignedToUserId == currentUserId).OrderByDescending(t => t.Created).Take(4).ToList();
 
-                    //var query = from tn in _db.TicketNotifications
-                    //            where tn.UserId == currentUserId
-                    //            from t in _db.Tickets
-                    //            where t.Id == tn.TicketId
-                    //            select t;
+                    var query = from tn in _db.TicketNotifications
+                                where tn.UserId == currentUserId
+                                from t in _db.Tickets
+                                where t.Id == tn.TicketId
+                                select t;
 
-                    //tickets = query.ToList();
+                    tickets = query.ToList();
                 }
             }
             else

@@ -1,0 +1,133 @@
+﻿@model BugTracker.Models.Ticket
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/js/ckeditor/ckeditor.js"></script>
+<script src="~/js/ckeditor/adapters/jquery.js"></script>
+
+
+
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = @Model.Id })">Create Comment</a></li>
+        <li><a href="@Url.Action("Create", "TicketAttachments", new { id = @Model.Id })">Attach Files</a></li>
+        @*<li><a href="@Url.Action("Create", "TicketComments", new { Id = @Model.Id })">Create Comment</a></li>
+        <li><a href="@Url.Action("Create", "TicketAttachments", new { Id = @Model.Id })">Attach Files</a></li>*@
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                @*<h4>Ticket Title : @Model.Title</h4>
+                <p><span class="glyphicon glyphicon-time"></span>Posted On @Model.Created.ToString("MM dd yyyy") </p>*@
+
+            </div>
+            <div class="content">
+
+                <div class="row">
+
+                    <h2>Create</h2>
+
+                    @using (Html.BeginForm("Create", "Tickets", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Ticket</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+
+                                    @Html.TextAreaFor(model => model.Description, new { id = "CreateDesc" })
+                                    <script>
+                                        CKEDITOR.replace("CreateDesc", { toolbar: "Basic" });
+                                    </script>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProjectId, "Project", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TicketTypeId, "Ticket Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TicketTypeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TicketPriorityId, "Ticket Priority", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TicketStatusId, "Ticket Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.OwnerUserId, "OwnerUserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("OwnerUserId", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.OwnerUserId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AssignedToUserId, "To Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*@Html.HiddenFor(model => model.ticketAttachmentsView)
+                                @Html.Label("Image Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div>
+                                    <input type="file" id="fileUpload" name="fileUpload" />
+                                </div>*@
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

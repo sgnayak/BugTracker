@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -4239,7 +4240,9 @@
     <Content Include="js\DataTables-1.10.4\dataTables.tableTools.min.js" />
     <Content Include="js\DataTables-1.10.4\jquery.dataTables.js" />
     <Content Include="js\DataTables-1.10.4\jquery.dataTables.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -4334,6 +4337,7 @@
     <Content Include="Views\Shared\_TicketsIndex.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
     <Content Include="Views\Projects\AssignUsersToProject.cshtml" />
+    <None Include="Properties\PublishProfiles\snayakbugtracker.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

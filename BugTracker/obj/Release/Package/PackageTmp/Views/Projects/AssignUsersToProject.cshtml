@@ -1,0 +1,41 @@
+﻿@model BugTracker.Models.UserToProject
+@{
+    //Layout = null;
+}
+
+
+<div class="page-head"> @Html.ActionLink("Create New Project", "Create") </div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Projects User Table</h3>
+            </div>
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("AssignUsersToProject", "Projects", new { pid = Model.ProjectId, ProjectName = Model.ProjectName }, FormMethod.Post))
+                        {
+                            @Html.ListBoxFor(m => Model.selectedUsersNotOnProjects, Model.usersNotOnProjects as MultiSelectList, new { @class = "form-control, form-group", style = "width: 225px; height:250px;" })
+                            <a><h4><input class="btn-primary pull-left right" type="Submit" name="addButton" value="Add Users To Projects" /></h4></a>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+
+                        @using (Html.BeginForm("RemoveUsersFromProject", "Projects", new { pid = Model.ProjectId, ProjectName = Model.ProjectName }, FormMethod.Post))
+                        {
+                            @Html.ListBoxFor(m => Model.selectedUsersOnProject, Model.usersOnProject as MultiSelectList, new { @class = "form-control, form-group", style = "width: 225px; height:250px;" })
+
+                            <a><h4><input class="btn-primary pull-left right" type="Submit" name="removeButton" value="Remove Users From Projects" /></h4></a>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

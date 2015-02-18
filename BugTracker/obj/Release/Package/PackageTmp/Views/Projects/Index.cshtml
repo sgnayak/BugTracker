@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BugTracker.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //initialize the javascript
+        //Basic Instance
+        $("#table_id_projects").dataTable();
+        //Search input style
+        $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');
+        $('.dataTables_length select').addClass('form-control');
+    }
+    );
+</script>
+
+<div class="page-head"> @Html.ActionLink("Create New Project", "Create") </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Projects User Table</h3>
+            </div>
+            <div class="content">
+                <div class="table-responsive">
+                    <table class="table" id="table_id_projects">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                        @Html.ActionLink("Add Users", "AssignUsersToProject", new { pid = item.Id })
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@model BugTracker.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("ChangePassword","Manage")">Change Password</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments")">Create Comment</a></li>
+        @*<li><a href="@Url.Action("Create", "TicketComments", new { Id = @Model.Id })">Create Comment</a></li>
+            <li><a href="@Url.Action("Create", "TicketAttachments", new { Id = @Model.Id })">Attach Files</a></li>*@
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                @*<h4>Ticket Title : @Model.Title</h4>
+                    <p><span class="glyphicon glyphicon-time"></span>Posted On @Model.Created.ToString("MM dd yyyy") </p>*@
+
+            </div>
+            <div class="content">
+
+                <div class="row">
+                    <dl class="dl-horizontal">
+                        <dt>Password:</dt>
+                        <dd>
+                            [
+                            @if (Model.HasPassword)
+                            {
+                                @Html.ActionLink("Change your password", "ChangePassword")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Create", "SetPassword")
+                            }
+                            ]
+                        </dd>
+                        <dt>External Logins:</dt>
+                        <dd>
+                            @Model.Logins.Count [
+                            @Html.ActionLink("Manage", "ManageLogins") ]
+                        </dd>
+                        @*
+                            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                             Uncomment the following block after you have set up two-factor authentication
+                        *@
+                        @*
+                            <dt>Phone Number:</dt>
+                            <dd>
+                                @(Model.PhoneNumber ?? "None") [
+                                @if (Model.PhoneNumber != null)
+                                {
+                                    @Html.ActionLink("Change", "AddPhoneNumber")
+                                    @: &nbsp;|&nbsp;
+                                    @Html.ActionLink("Remove", "RemovePhoneNumber")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Add", "AddPhoneNumber")
+                                }
+                                ]
+                            </dd>
+                        *@
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model BugTracker.Models.TicketComment
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-head">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Tickets")">Tickets</a></li>
+        <li><a href="@Url.Action("Create", "TicketComments", new { id = Model.Id })">Create Comment</a></li>
+        <li class="active"><a href="@Url.Action("Create", "TicketAttachments", new { id = Model.Id })">Attach Files</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="block-flat">
+            <div class="header">
+                <h4>Create Ticket Comment</h4>
+            </div>
+            <div class="content">
+                <div class="row">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group row ">
+                            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.TicketId, "Ticket", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @*@Html.DropDownList("TicketId", null, htmlAttributes: new { @class = "form-control" })*@
+                                @Html.EditorFor(model => model.Ticket.Title, new { htmlAttributes = new { @class = "form-control", @disabled = "Disabled" } })
+                                @Html.HiddenFor(model => model.TicketId)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.UserId, "User", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.User.DisplayName, new { htmlAttributes = new { @class = "form-control", @disabled = "Disabled" } })
+                                @Html.HiddenFor(model => model.UserId)
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div>
+                    @*@Html.ActionLink("Back to List", "Index")*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

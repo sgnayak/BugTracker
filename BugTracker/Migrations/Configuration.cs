@@ -89,6 +89,9 @@ namespace BugTracker.Migrations
             }
             var userIdSatya = userManager.FindByEmail("satyanayak@me.com").Id;
             userManager.AddToRole(userIdSatya, "Admin");
+            userManager.AddToRole(userIdSatya, "Developer");
+            userManager.AddToRole(userIdSatya, "Project Manager");
+
 
 
             if (!context.Users.Any(u => u.Email == "avatar@me.com"))

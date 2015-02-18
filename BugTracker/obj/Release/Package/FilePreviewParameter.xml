@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="snayakbugtracker" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\satyanayak\\Documents\\Github\\Visual\ Studio\ 2013\\Projects\\BugTracker\\BugTracker\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\satyanayak\\Documents\\Github\\Visual\ Studio\ 2013\\Projects\\BugTracker\\BugTracker\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=mbmuw7kmu9.database.windows.net;Initial Catalog=snayakbugdatabase;Integrated Security=False;User ID=CoderFoundry;Password=LearnToCode1;Encrypt=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\satyanayak\\Documents\\Github\\Visual\ Studio\ 2013\\Projects\\BugTracker\\BugTracker\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="snayakBugAzure-Web.config Connection String" description="" value="Data Source=mbmuw7kmu9.database.windows.net;Initial Catalog=snayakbugdatabase;Integrated Security=False;User ID=CoderFoundry;Password=LearnToCode1;Encrypt=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\satyanayak\\Documents\\Github\\Visual\ Studio\ 2013\\Projects\\BugTracker\\BugTracker\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='snayakBugAzure']/@connectionString" />
+  </parameter>
+</parameters>

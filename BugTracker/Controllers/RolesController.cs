@@ -14,6 +14,8 @@ namespace BugTracker.Controllers
     [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Rolles
         [HttpGet]
         [AllowAnonymous]
@@ -21,8 +23,6 @@ namespace BugTracker.Controllers
         public ActionResult ListUsers()
         {
             var roles = new List<UserRoleViewModel>();
-
-            ApplicationDbContext db = new ApplicationDbContext();
 
             var adminId = db.Roles.Single(r => r.Name == "Admin").Id;
             var projectManagerId = db.Roles.Single(r => r.Name == "Project Manager").Id;
@@ -34,7 +34,7 @@ namespace BugTracker.Controllers
                 var urvm = new UserRoleViewModel
                 {
                     userId = user.Id,
-                    name = user.DisplayName,
+                    name = user.FirstName + " " + user.LastName,
                     admin = user.Roles.Any(r => r.RoleId == adminId),
                     projectManager = user.Roles.Any(r => r.RoleId == projectManagerId),
                     developer = user.Roles.Any(r => r.RoleId == developerId),
@@ -60,14 +60,14 @@ namespace BugTracker.Controllers
         [HttpGet]
         public ActionResult Edit(string UserId)
         {
-            ApplicationDbContext UserDb = new ApplicationDbContext();
-            IList<IdentityRole> userRoles = UserDb.Roles.ToList();
+           // ApplicationDbContext db = new ApplicationDbContext();
+            IList<IdentityRole> userRoles = db.Roles.ToList();
             var helper = new UserRolesHelper();
-            var ListOfRoles = UserDb.Roles.OrderBy(r => r.Name).ToList().Select(rr => rr.Name.ToString()).ToList();
+            var ListOfRoles = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => rr.Name.ToString()).ToList();
 
             RolesViewModels myRole = new RolesViewModels();
             myRole.UserId = UserId;
-            var user = UserDb.Users.Find(UserId);
+            var user = db.Users.Find(UserId);
             myRole.UserName = user.Email;
 
             var ListOfCurrentRoles = helper.ListUserRoles(UserId);
@@ -136,8 +136,8 @@ namespace BugTracker.Controllers
         public ActionResult ChooseRolePartial(string username)
         {
             var helper = new UserRolesHelper();
-            ApplicationDbContext UserDb = new ApplicationDbContext();
-            var ListOfRoles = UserDb.Roles.OrderBy(r => r.Name).ToList().Select(rr => rr.Name.ToString()).ToList();
+            //ApplicationDbContext UserDb = new ApplicationDbContext();
+            var ListOfRoles = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => rr.Name.ToString()).ToList();
 
             var userRoles = helper.ListUserRoles(username);
             var roles = ListOfRoles.Select(x => new SelectListItem
@@ -163,13 +163,15 @@ namespace BugTracker.Controllers
         [HttpPost]
         public ActionResult EditUserRoles(List<UserRoleViewModel> users)
         {
-            UserRolesHelper uRoleHelper = new UserRolesHelper();
-            var usersInAdminRole = uRoleHelper.UsersInRoles("Admin");
+            //UserRolesHelper uRoleHelper = new UserRolesHelper();
+            var helper = new UserRolesHelper();
+
+            var usersInAdminRole = helper.UsersInRoles("Admin");
             var adminCount = usersInAdminRole.Count();
+
 
             foreach (var c in users)
             {
-                var helper = new UserRolesHelper();
                 if (c.admin)
                 {
                     helper.AddUserRole(c.userId, "Admin");
@@ -207,6 +209,7 @@ namespace BugTracker.Controllers
                     helper.RemoveUserRole(c.userId, "Submitter");
                 }
             }
+
             return RedirectToAction("ListUsers");
         }
     }
